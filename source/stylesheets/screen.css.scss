@@ -19,58 +19,52 @@ WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 License for the specific language governing permissions and limitations
 under the License.
 */
+/**
+ * @license
+ * MyFonts Webfont Build ID 4098255, 2021-06-04T10:17:30-0400
+ * 
+ * The fonts listed in this notice are subject to the End User License
+ * Agreement(s) entered into by the website owner. All other parties are 
+ * explicitly restricted from using the Licensed Webfonts(s).
+ * 
+ * You may obtain a valid license at the URLs below.
+ * 
+ * Webfont: Gilroy-Medium by Radomir Tinkov
+ * URL: https://www.myfonts.com/fonts/radomir-tinkov/gilroy/medium/
+ * 
+ * Webfont: Gilroy-ExtraBold by Radomir Tinkov
+ * URL: https://www.myfonts.com/fonts/radomir-tinkov/gilroy/extra-bold/
+ * 
+ * Webfont: Gilroy-Bold by Radomir Tinkov
+ * URL: https://www.myfonts.com/fonts/radomir-tinkov/gilroy/bold/
+ * 
+ * 
+ * Webfonts copyright: Copyright &amp;#x00A9; 2016 by Radomir Tinkov. All rights reserved.
+ * 
+ * © 2021 MyFonts Inc
+*/
+
+
+/* @import must be at top of file, otherwise CSS will not work */
+@import url("//hello.myfonts.net/count/3e88cf");
+  
+@font-face {
+  font-family: "Gilroy-Bold";
+  src: url('/fonts/GilroyBold/font.woff2') format('woff2'), url('/fonts/GilroyBold/font.woff') format('woff');
+}
+@font-face {
+  font-family: "Gilroy-Medium";
+  src: url('/fonts/GilroyMedium/font.woff2') format('woff2'), url('/fonts/GilroyMedium/font.woff') format('woff');
+}
+@font-face {
+  font-family: "Gilroy-ExtraBold";
+  src: url('/fonts/GilroyExtraBold/font.woff2') format('woff2'), url('/fonts/GilroyExtraBold/font.woff') format('woff');
+}
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // GENERAL STUFF
 ////////////////////////////////////////////////////////////////////////////////
-
-@font-face {
-  font-family: 'AauxNext-Bold';
-  src: local('AauxNext-Bold'), url(../fonts/AauxNext-Bold.eot); /* IE9 Compat Modes */
-  src: local('AauxNext-Bold'),
-       url(../fonts/AauxNext-Bold.woff) format('woff'), /* Pretty Modern Browsers */
-       url(../fonts/AauxNext-Bold.ttf)  format('truetype'); /* Safari, Android, iOS */
-}
-
-@font-face {
-  font-family: 'AauxNext-Regular';
-  src: local('AauxNext-Regular'), url(../fonts/AauxNext-Regular.eot); /* IE9 Compat Modes */
-  src: local('AauxNext-Regular'),
-       url(../fonts/AauxNext-Regular.woff) format('woff'), /* Pretty Modern Browsers */
-       url(../fonts/AauxNext-Regular.ttf)  format('truetype'); /* Safari, Android, iOS */
-}
-
-@font-face {
-  font-family: 'AauxNext-Light';
-  src: local('AauxNext-Light'), url(../fonts/AauxNext-Light.eot); /* IE9 Compat Modes */
-  src: local('AauxNext-Light'),
-       url(../fonts/AauxNext-Light.woff) format('woff'), /* Pretty Modern Browsers */
-       url(../fonts/AauxNext-Light.ttf)  format('truetype'); /* Safari, Android, iOS */
-}
-
-@font-face {
-  font-family: 'AauxNext-SemiBold';
-  src: local('AauxNext-SemiBold'), url(../fonts/AauxNext-SemiBold.eot); /* IE9 Compat Modes */
-  src: local('AauxNext-SemiBold'),
-       url(../fonts/AauxNext-SemiBold.woff) format('woff'), /* Pretty Modern Browsers */
-       url(../fonts/AauxNext-SemiBold.ttf)  format('truetype'); /* Safari, Android, iOS */
-}
-
-@font-face {
-  font-family: 'Tungsten-Medium';
-  src: local('Tungsten-Medium'), url(../fonts/Tungsten-Medium.eot); /* IE9 Compat Modes */
-  src: local('Tungsten-Medium'),
-       url(../fonts/Tungsten-Medium.woff) format('woff'), /* Pretty Modern Browsers */
-       url(../fonts/Tungsten-Medium.ttf)  format('truetype'); /* Safari, Android, iOS */
-}
-
-@font-face {
-  font-family: 'Tungsten-Semibold';
-  src: local('Tungsten-Semibold'), url(../fonts/Tungsten-Semibold.eot); /* IE9 Compat Modes */
-  src: local('Tungsten-Semibold'),
-       url(../fonts/Tungsten-Semibold.woff) format('woff'), /* Pretty Modern Browsers */
-       url(../fonts/Tungsten-Semibold.ttf)  format('truetype'); /* Safari, Android, iOS */
-}
 
 html, body {
   color: $main-text;
@@ -108,7 +102,7 @@ html, body {
   width: $nav-width;
   background-color: $nav-bg;
   font-size: 13px;
-  font-family: 'AauxNext-Semibold';
+  font-family: 'Gilroy-Medium';
 
   // language selector for mobile devices
   .lang-selector {
@@ -275,7 +269,7 @@ html, body {
   z-index: 100;
   color: #000;
   text-decoration: none;
-  font-family: 'AauxNext-Semibold';
+  font-family: 'Gilroy-Medium';
   opacity: 0.7;
   line-height: 16px;
   img {
@@ -328,7 +322,7 @@ html, body {
   display: flex;
   background-color: $lang-select-bg;
   width: 100%;
-  font-family: 'AauxNext-Semibold';
+  font-family: 'Gilroy-Bold';
   overflow-x: auto;
   a {
     display: inline;
@@ -461,7 +455,7 @@ html, body {
       border-bottom: 1px solid #ccc;
       vertical-align: bottom;
       font-weight: normal;
-      font-family: 'AauxNext-SemiBold';
+      font-family: 'Gilroy-Bold';
     }
 
     td {
@@ -482,7 +476,7 @@ html, body {
   }
 
   dt {
-    font-family: 'AauxNext-Bold';
+    font-family: 'Gilroy-Bold';
   }
 
   dd {
