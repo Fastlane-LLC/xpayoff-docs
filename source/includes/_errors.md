@@ -1,6 +1,6 @@
 # Errors
 
-Our Carrier API uses the following error codes:
+Our API uses the following error codes:
 
 Error Code | Meaning
 ---------- | -------

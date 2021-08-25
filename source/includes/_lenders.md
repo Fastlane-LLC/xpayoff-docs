@@ -9,7 +9,8 @@
   "aliases": [
     "Test Lender Bank",
     "Bank of Test Lender"
-  ]
+  ],
+  "integrated": true
 }
 ```
 
@@ -20,6 +21,7 @@ The Lender object itself contains the following keys:
 Object Key | Description
 ---------- | -----------
 aliases | An array of strings containing common aliases that have been indexed in LossExpress for this lender
+integrated | Boolean describing whether the lender qualifies for automated payoffs
 lenderId | The LossExpress UUID for the lender
 lenderName | The name of the lender in LossExpress
 

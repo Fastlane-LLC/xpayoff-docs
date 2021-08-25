@@ -61,6 +61,7 @@ Where STRINGIFIED_REQUEST is the JSON of the request body (with no padding/white
     "zipCode": "75204"
   }
   "success": true,
+  "fulfilledBy": "integration"
 }
 ```
 
@@ -75,6 +76,7 @@ validThroughDate | A JSON timestamp for the valid through date | `2020-08-22T00:
 lenderPhoneNumber | A valid phone number for the lender | `+12223334444`
 standardMailingAddress | Contains a standard mailing address for the lender |
 overnightMailingAddress | Contains an overnight mailing address for the lender |
+accountNumber | Contains the account number for the account as provided by the lender |
 eftAccountNumber | An account number for EFT |
 eftRoutingNumber | A routing number for EFT |
 eftState | The state, as it relates to EFT | `TX`
@@ -82,6 +84,7 @@ eftCity | The city, as it relates to EFT | `DALLAS`
 eftZipCode | The ZIP code, as it relates to EFT | `75204`
 success | A boolean, stating whether we were able to retrieve the payoff or not | `true`
 errorMessage | If success is false, we will attempt to provide an error message
+fulfilledBy | Can be `"integration"` or `"fulfillment center"`, depending on how the payoff was fulfilled | `integration`
 
 <aside class="notice">
   Only `payoffId` and `success` are guaranteed to be in any given webhook body sent.
