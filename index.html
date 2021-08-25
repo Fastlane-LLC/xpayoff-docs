@@ -282,8 +282,8 @@
   color: #859900;
 }
     </style>
-    <link href="stylesheets/screen-bcd85f94.css" rel="stylesheet" media="screen" />
-    <link href="stylesheets/print-eecc67b3.css" rel="stylesheet" media="print" />
+    <link href="stylesheets/screen-8e5a99c1.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print-edd835a0.css" rel="stylesheet" media="print" />
       <script src="javascripts/all-e033bdd3.js"></script>
 
     <script>
@@ -299,7 +299,7 @@
       </span>
     </a>
     <div class="toc-wrapper">
-      <img src="images/logo-142da6b8.png" class="logo" alt="" />
+      <img src="images/logo-351b423e.png" class="logo" alt="" />
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
         </div>
@@ -337,10 +337,13 @@
             <a href="#loan-payoff-request" class="toc-h1 toc-link" data-title="Loan Payoff Request">Loan Payoff Request</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#http-request" class="toc-h2 toc-link" data-title="HTTP Request">HTTP Request</a>
+                    <a href="#create-request" class="toc-h2 toc-link" data-title="Create Request">Create Request</a>
                   </li>
                   <li>
-                    <a href="#request-body" class="toc-h2 toc-link" data-title="Request Body">Request Body</a>
+                    <a href="#cancel-request" class="toc-h2 toc-link" data-title="Cancel Request">Cancel Request</a>
+                  </li>
+                  <li>
+                    <a href="#request-parameters" class="toc-h2 toc-link" data-title="Request Parameters">Request Parameters</a>
                   </li>
               </ul>
           </li>
@@ -389,6 +392,7 @@
     </span><span class="nl">"zipCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"75204"</span><span class="w">
   </span><span class="p">}</span><span class="w">
   </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"fulfilledBy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"integration"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>The body of the request sent to the webhook will be a JSON object with the following possible keys:</p>
@@ -436,6 +440,11 @@
 <td></td>
 </tr>
 <tr>
+<td>accountNumber</td>
+<td>Contains the account number for the account as provided by the lender</td>
+<td></td>
+</tr>
+<tr>
 <td>eftAccountNumber</td>
 <td>An account number for EFT</td>
 <td></td>
@@ -470,6 +479,11 @@
 <td>If success is false, we will attempt to provide an error message</td>
 <td></td>
 </tr>
+<tr>
+<td>fulfilledBy</td>
+<td>Can be <code>&quot;integration&quot;</code> or <code>&quot;fulfillment center&quot;</code>, depending on how the payoff was fulfilled</td>
+<td><code>integration</code></td>
+</tr>
 </tbody></table>
 
 <aside class="notice">
@@ -485,7 +499,8 @@
   </span><span class="nl">"aliases"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="s2">"Test Lender Bank"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"Bank of Test Lender"</span><span class="w">
-  </span><span class="p">]</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"integrated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>The route in this section is meant to be used for providing a robust search solution for the end users of our partners. We do not currently provide an index containing all of our lenders, as that information is frequently updated and added to.</p>
@@ -501,6 +516,10 @@
 <tr>
 <td>aliases</td>
 <td>An array of strings containing common aliases that have been indexed in LossExpress for this lender</td>
+</tr>
+<tr>
+<td>integrated</td>
+<td>Boolean describing whether the lender qualifies for automated payoffs</td>
 </tr>
 <tr>
 <td>lenderId</td>
@@ -540,7 +559,7 @@
 <td>Name being queried against in LossExpress. Must be at least 3 characters long, and must be properly encoded</td>
 </tr>
 </tbody></table>
-<h1 id='loan-payoff-request'>Loan Payoff Request</h1>
+<h1 id='loan-payoff-request'>Loan Payoff Request</h1><h2 id='create-request'>Create Request</h2>
 <blockquote>
 <p>This route returns the following object:</p>
 </blockquote>
@@ -554,6 +573,8 @@
 </blockquote>
 
 <p>You can use this route to make a loan payoff request. Please note that although not every field is required, our query success rate increases with the more data provided to us.</p>
+
+<p>Please note that if you are subscribed to our Fulfillment Center, high success rates require as much information as possible.</p>
 <h3 id='http-request'>HTTP Request</h3>
 <p><code>POST https://xpayoff-api.lossexpress.com/payoff</code></p>
 <h3 id='request-body'>Request Body</h3>
@@ -564,51 +585,101 @@
 <th>Body Parameter</th>
 <th>Description</th>
 <th>Required?</th>
+<th>Fulfillment Center Only</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>accountNumber</td>
 <td>The account number for the loan; we may not be able to obtain payoffs without this in some cases</td>
 <td>N</td>
+<td>N</td>
 </tr>
 <tr>
 <td>customerName</td>
 <td>The name of the customer for the loan</td>
+<td>N</td>
 <td>N</td>
 </tr>
 <tr>
 <td>entityName</td>
 <td>The name of the organization, dealership, lender, or other entity that is requesting the payoff information for their own purposes. This must be the organization that will act on the data.</td>
 <td>Y</td>
+<td>N</td>
 </tr>
 <tr>
 <td>financeType</td>
 <td>How the loan was financed, can be one of: <code>Retail</code> or <code>Lease</code></td>
+<td>N</td>
 <td>N</td>
 </tr>
 <tr>
 <td>lenderId</td>
 <td>The LossExpress Lender UUID. You can receive this UUID by utilizing our lender search functionality</td>
 <td>Y</td>
+<td>N</td>
+</tr>
+<tr>
+<td>lenderName</td>
+<td>A lender name, if a corresponding lender is not in our lender database; this will enter the lender into our queue for validation. Use lenderId whenever possible</td>
+<td>Y</td>
+<td>Y</td>
 </tr>
 <tr>
 <td>requesterEmailAddress</td>
 <td>The email address of the user requesting the data</td>
 <td>N</td>
+<td>Y</td>
 </tr>
 <tr>
 <td>requesterName</td>
 <td>The name of the user requesting the data</td>
 <td>N</td>
+<td>Y</td>
 </tr>
 <tr>
 <td>requesterPhoneNumber</td>
 <td>The phone number of the user requesting the data</td>
 <td>N</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>socialSecurityNumber</td>
+<td>The customer&#39;s social security number, can be full or the last four</td>
+<td>N</td>
+<td>N</td>
 </tr>
 <tr>
 <td>vin</td>
 <td>Vehicle Identification Number</td>
+<td>Y</td>
+<td>N</td>
+</tr>
+</tbody></table>
+<h2 id='cancel-request'>Cancel Request</h2>
+<blockquote>
+<p>This route returns the following object:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"payoffId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"98efa558-4f62-4917-9aff-76ed0c4effa8"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><strong>This route is only available when subscribed to our Fulfillment Center.</strong></p>
+
+<p>This route can be utilized to cancel an ongoing request in our system.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>DELETE https://xpayoff-api.lossexpress.com/payoff/{payoffId}</code></p>
+<h2 id='request-parameters'>Request Parameters</h2>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required?</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>payoffId</td>
+<td>LossExpress payoff request UUID</td>
 <td>Y</td>
 </tr>
 </tbody></table>
