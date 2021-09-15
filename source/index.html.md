@@ -89,3 +89,13 @@ fulfilledBy | Can be `"integration"` or `"fulfillment center"`, depending on how
 <aside class="notice">
   Only `payoffId` and `success` are guaranteed to be in any given webhook body sent.
 </aside>
+
+### Error Messages (Fulfillment Center)
+
+Below are the current list of messages that could be returned when we run into an issue gathering a payoff via our fulfillment center:
+
+- Loan has been paid off
+- Loan could not be located with information given
+- Customer authorization required
+- Lender would not release payoff information
+- Maximum call attempts reached
