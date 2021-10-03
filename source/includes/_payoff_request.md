@@ -29,6 +29,8 @@ Body Parameter | Description | Required? | Fulfillment Center Only
 -------------- | ----------- | --------- | -----------------------
 accountNumber | The account number for the loan; we may not be able to obtain payoffs without this in some cases | N | N
 customerName | The name of the customer for the loan | N | N
+customerAddress | The address of the customer for the loan | N | N
+customerPhoneNumber | The phone number of the customer for the loan | N | N
 entityName | The name of the organization, dealership, lender, or other entity that is requesting the payoff information for their own purposes. This must be the organization that will act on the data. | Y | N
 financeType | How the loan was financed, can be one of: `Retail` or `Lease` | N | N
 lenderId | The LossExpress Lender UUID. You can receive this UUID by utilizing our lender search functionality | Y | N
