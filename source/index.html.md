@@ -60,9 +60,10 @@ Where STRINGIFIED_REQUEST is the JSON of the request body (with no padding/white
     "city": "Dallas",
     "state": "TX",
     "zipCode": "75204"
-  }
+  },
   "success": true,
-  "fulfilledBy": "integration"
+  "fulfilledBy": "integration",
+  "customerAuthorizationAttempted": true
 }
 ```
 
