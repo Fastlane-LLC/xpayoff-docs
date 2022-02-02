@@ -45,7 +45,7 @@ If a lender is not found in our database, simply pass the lender name in place o
 
 ### HTTP Request
 
-`GET https://xpayoff-api.lossexpress.com/lenders`
+`GET https://{YOUR_BASE_URL}/lenders`
 
 ### Query Parameters
 
