@@ -309,6 +309,9 @@
             <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
           </li>
           <li>
+            <a href="#testing" class="toc-h1 toc-link" data-title="Testing">Testing</a>
+          </li>
+          <li>
             <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
           </li>
           <li>
@@ -354,6 +357,51 @@
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
 <p>Welcome to the LossExpress xPayoff API! You can utilize this API to get pertinent information regarding a consumer&#39;s vehicle loan.</p>
+<h1 id='testing'>Testing</h1>
+<p>Depending on the configuration of your instance, please use one of the following as your base URL:</p>
+
+<table><thead>
+<tr>
+<th>Production URL</th>
+<th>Development URL</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>https://xpayoff-api.lossexpress.com/</code></td>
+<td><code>https://xpayoff-api-dev.lossexpress.com/</code></td>
+</tr>
+</tbody></table>
+
+<p>The following Test VINs can be used on both instances when making a payoff request. 
+See <a href="#loan-payoff-request">Loan Payoff Request</a> and <a href="##webhook-body">Webhook Body</a> for more details.</p>
+
+<table><thead>
+<tr>
+<th>Test VIN</th>
+<th>Outcome</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>1FTMF1CB6JKE12626</code></td>
+<td>Automated Payoff Quote</td>
+</tr>
+<tr>
+<td><code>1N4AA5AP8EC474073</code></td>
+<td>Automated Payoff Quote</td>
+</tr>
+<tr>
+<td><code>5FNYF4H46CB077722</code></td>
+<td>Automated Payoff Quote</td>
+</tr>
+<tr>
+<td><code>3LNHL2JC5CR800827</code></td>
+<td>Automated Payoff Quote</td>
+</tr>
+<tr>
+<td><code>ZA9RU31B9XLA12448</code></td>
+<td>Automated Payoff Quote</td>
+</tr>
+</tbody></table>
 <h1 id='authentication'>Authentication</h1>
 <p>Our xPayoff API utilizes a simple API key-based authentication, where the key (generated from our developer interface) must be passed in the Authorization header like so:</p>
 
@@ -562,7 +610,7 @@
 
 <p>If a lender is not found in our database, simply pass the lender name in place of a <code>lenderId</code> when creating a claim in LossExpress, and our team will add the lender to the database for future requests, if possible.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code>GET https://xpayoff-api.lossexpress.com/lenders</code></p>
+<p><code>GET https://{YOUR_BASE_URL}/lenders</code></p>
 <h3 id='query-parameters'>Query Parameters</h3>
 <table><thead>
 <tr>
@@ -592,7 +640,7 @@
 
 <p>Please note that if you are subscribed to our Fulfillment Center, high success rates require as much information as possible.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code>POST https://xpayoff-api.lossexpress.com/payoff</code></p>
+<p><code>POST https://{YOUR_BASE_URL}/payoff</code></p>
 <h3 id='request-body'>Request Body</h3>
 <p>This route accepts a JSON payload of an object comprising of:</p>
 
@@ -708,7 +756,7 @@
 
 <p>This route can be utilized to cancel an ongoing request in our system.</p>
 <h3 id='http-request-2'>HTTP Request</h3>
-<p><code>DELETE https://xpayoff-api.lossexpress.com/payoff/{payoffId}</code></p>
+<p><code>DELETE https://{YOUR_BASE_URL}/payoff/{payoffId}</code></p>
 <h3 id='request-parameters'>Request Parameters</h3>
 <table><thead>
 <tr>
