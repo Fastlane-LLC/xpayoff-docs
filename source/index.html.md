@@ -15,6 +15,25 @@ code_clipboard: true
 
 Welcome to the LossExpress xPayoff API! You can utilize this API to get pertinent information regarding a consumer's vehicle loan.
 
+# Testing
+
+Depending on the configuration of your instance, please use one of the following as your base URL:
+
+Production URL | Development URL                   | 
+----------|---------------------------------|
+`https://xpayoff-api.lossexpress.com/` | `https://xpayoff-api-dev.lossexpress.com/` 
+
+The following Test VINs can be used on both instances when making a payoff request. 
+See [Loan Payoff Request](#loan-payoff-request) and [Webhook Body](##webhook-body) for more details.
+
+Test VIN | Outcome                                          | 
+----------|--------------------------------------------|
+`1FTMF1CB6JKE12626` | Automated Payoff Quote 
+`1N4AA5AP8EC474073` | Automated Payoff Quote 
+`5FNYF4H46CB077722` | Automated Payoff Quote 
+`3LNHL2JC5CR800827` | Automated Payoff Quote 
+`ZA9RU31B9XLA12448` | Automated Payoff Quote 
+
 # Authentication
 
 Our xPayoff API utilizes a simple API key-based authentication, where the key (generated from our developer interface) must be passed in the Authorization header like so:

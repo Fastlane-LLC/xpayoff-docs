@@ -19,7 +19,7 @@ Please note that if you are subscribed to our Fulfillment Center, high success r
 
 ### HTTP Request
 
-`POST https://xpayoff-api.lossexpress.com/payoff`
+`POST https://{YOUR_BASE_URL}/payoff`
 
 ### Request Body
 
@@ -60,7 +60,7 @@ This route can be utilized to cancel an ongoing request in our system.
 
 ### HTTP Request
 
-`DELETE https://xpayoff-api.lossexpress.com/payoff/{payoffId}`
+`DELETE https://{YOUR_BASE_URL}/payoff/{payoffId}`
 
 ### Request Parameters
 
