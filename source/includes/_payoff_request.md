@@ -43,6 +43,9 @@ socialSecurityNumber | The customer's social security number, can be full or the
 vehicleMileage | The customer's mileage on the vehicle | N | N
 vin | Vehicle Identification Number | Y | N
 
+**Note: Some lenders require Account Number and/or Social Security Number to successfully return the payoff.**
+
+
 ## Cancel Request
 
 > This route returns the following object:
