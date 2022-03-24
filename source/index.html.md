@@ -124,6 +124,6 @@ Below are the current list of messages that could be returned when we run into a
   - Request needs to be sent by fax 
 - Loan has been paid off
 - Loan could not be located with information given
-- Lender would not release payoff information
 - Customer authorization required
+- Lender would not release payoff information
 - Maximum call attempts reached
