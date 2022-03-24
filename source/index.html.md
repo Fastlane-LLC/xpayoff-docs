@@ -116,6 +116,12 @@ The body of the request sent to the webhook will be a JSON object with the follo
 
 Below are the current list of messages that could be returned when we run into an issue gathering a payoff via our fulfillment center:
 
+- Lender would not release payoff information because:
+  - Lender would not release information over the phone number
+  - Need Full Member number
+  - Need Full Social Security Number
+  - Lender would not release to a third party
+  - Request needs to be sent by fax 
 - Loan has been paid off
 - Loan could not be located with information given
 - Customer authorization required
