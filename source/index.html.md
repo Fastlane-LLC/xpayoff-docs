@@ -68,7 +68,10 @@ Where STRINGIFIED_REQUEST is the JSON of the request body (with no padding/white
 
 ```json
 {
+  "packetId": "f94bbd89-e9e0-45ac-a02b-e4d4afad6a8f",
   "payoffId": "f94bbd89-e9e0-45ac-a02b-e4d4afad6a8f",
+  "orderId": "61951010-d4a0-48b3-86b6-3908da2b0800",
+  "orderType": "Payoff Request",
   "payoffAmount": 10222.33,
   "perDiem": 2.33,
   "validThroughDate": "2020-08-22T00:00:00.000Z",
