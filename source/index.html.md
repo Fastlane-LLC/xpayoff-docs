@@ -33,6 +33,7 @@ Test VIN | Outcome                                          |
 `5FNYF4H46CB077722` | Automated Payoff Quote 
 `3LNHL2JC5CR800827` | Automated Payoff Quote 
 `ZA9RU31B9XLA12448` | Automated Payoff Quote 
+`1N4AL3AP8JC231503` | Automated Payoff Quote
 
 # Authentication
 
