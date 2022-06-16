@@ -25,7 +25,7 @@ Production URL | Development URL                   |
 `https://xpayoff-api.lossexpress.com/` | `https://xpayoff-api-dev.lossexpress.com/` 
 
 The following Test VINs can be used on both instances when making a payoff request. 
-See [Loan Payoff Request](#loan-payoff-request) and [Webhook Body](##webhook-body) for more details.
+See [Loan Payoff Request](#loan-payoff-request) and [Webhook Body](#webhook-body) for more details.
 
 Test VIN | Outcome                                          | 
 ----------|--------------------------------------------|
