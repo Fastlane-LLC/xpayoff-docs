@@ -66,7 +66,7 @@ Where STRINGIFIED_REQUEST is the JSON of the request body (with no padding/white
 
 ## Webhook Body
 
-> Example Body:
+> Example "Payoff Request" Webhook Body:
 
 ```json
 {
@@ -92,6 +92,68 @@ Where STRINGIFIED_REQUEST is the JSON of the request body (with no padding/white
   "customerAuthorizationAttempted": true
 }
 ```
+
+> Example Document Order Type Webhook Body:
+
+```json
+{
+  "packetId": "a18854a1-ee1c-4ce5-817e-4307ae029894",
+  "orderType": "Bill of Sale",
+  "orderId": "467eaac4-9a34-480c-85e4-b8da79184a2f",
+  "documentUrl": "http://{YOUR_BASE_URL}}/documents/f02e4050-6596-46ed-bf1e-0456403964af",
+  "success": true,
+  "fulfilledBy": "fulfillment center",
+  "customerAuthorizationAttempted": false
+}
+```
+
+> Example "Payment Status" Webhook Body:
+
+```json
+{
+  "packetId": "29782bd1-3d7c-43db-ace9-1182ee65a29a",
+  "orderType": "Payment Status",
+  "orderId": "6eb55f20-4d2b-4bd4-8f9c-271842f2852c",
+  "paymentReceived": true,
+  "dateReceived": "2022-05-12",
+  "paymentDeposited": true,
+  "dateDeposited": "2022-05-05",
+  "paymentMailingAddress": {
+    "streetAddress": "P.O. Box 660443",
+    "city": "Dallas",
+    "zipCode": "75265",
+    "state": "TX"
+  },
+  "success": true,
+  "fulfilledBy": "fulfillment center",
+  "customerAuthorizationAttempted": false
+}
+```
+
+> Example "Title Status" Webhook Body:
+
+```json
+{
+  "packetId": "29782bd1-3d7c-43db-ace9-1182ee65a29a",
+  "orderType": "Title Status",
+  "orderId": "85a4796f-a970-4968-a5ff-77b5b4410dab",
+  "trackingNumber": "340-7-52607790A-PKG1OF1",
+  "titleSent": true,
+  "dateSent": "2022-05-19",
+  "titleDeliveryScheduled": "2022-05-12",
+  "deliveryType": "UPS",
+  "titleAddress": {
+    "streetAddress": "P.O. Box 660443",
+    "city": "Dallas",
+    "zipCode": "75265",
+    "state": "TX"
+  },
+  "success": true,
+  "fulfilledBy": "fulfillment center",
+  "customerAuthorizationAttempted": false
+}
+```
+
 
 The body of the request sent to the webhook will be a JSON object with the following possible keys:
 
