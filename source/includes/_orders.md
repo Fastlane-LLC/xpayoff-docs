@@ -88,6 +88,8 @@ types | An array of the types of orders for the request | Y | Y
 }
 ```
 
+This route allows cancellation of a particular order in event that it is no longer needed. 
+
 ### HTTP Request
 
 `DELETE https://{{YOUR_BASE_URL}}/orders/cancel-order/{orderId}`
@@ -97,3 +99,37 @@ types | An array of the types of orders for the request | Y | Y
 Parameter | Description
 --------- | -----------
 orderId | The LossExpress UUID associated with the order to be cancelled
+
+## Cancel Packet Request
+
+> Cancel Packet Request Example Response Body:
+
+```json
+{
+  "success": true,
+  "orders": [
+    {
+      "orderId": "d932d1f0-656b-45d6-ae27-1e0904523b3f",
+      "type": "Payoff Request",
+      "status": "cancelled"
+    },
+    {
+      "orderId": "45581b4d-4849-45ed-adc2-fdb7a333486c",
+      "type": "Bill of Sale",
+      "status": "cancelled"
+    }
+  ]
+}
+```
+
+This route allows cancellation of an entire request, which will subsequently cancel all orders related to a packet.
+
+### HTTP Request
+
+`DELETE https://{{YOUR_BASE_URL}}/orders/{packetId}`
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+packetId | The LossExpress UUID associated with the packet to be cancelled
