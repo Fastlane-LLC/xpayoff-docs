@@ -3,6 +3,7 @@ title: LossExpress xPayoff API
 
 includes:
   - lenders
+  - orders
   - payoff_request
   - errors
 
