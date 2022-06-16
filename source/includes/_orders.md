@@ -14,7 +14,7 @@
 This route returns an array of strings, which consists of the current types of orders that can be requested.
 ### HTTP Request
 
-`GET https://{{YOUR_BASE_URL}}/orders/order-types`
+`GET https://{YOUR_BASE_URL}/orders/order-types`
 
 Order Type | Description                      | 
 ----------|------------------------|
@@ -57,7 +57,7 @@ Please note that if you are subscribed to our Fulfillment Center, high success r
 
 ### HTTP Request
 
-`POST https://{{YOUR_BASE_URL}}/orders`
+`POST https://{YOUR_BASE_URL}/orders`
 
 ### Request Body
 
@@ -105,7 +105,7 @@ This route allows cancellation of a particular order in event that it is no long
 
 ### HTTP Request
 
-`DELETE https://{{YOUR_BASE_URL}}/orders/cancel-order/{orderId}`
+`DELETE https://{YOUR_BASE_URL}/orders/cancel-order/{orderId}`
 
 ### URL Parameters
 
@@ -139,7 +139,7 @@ This route allows cancellation of an entire request, which will subsequently can
 
 ### HTTP Request
 
-`DELETE https://{{YOUR_BASE_URL}}/orders/{packetId}`
+`DELETE https://{YOUR_BASE_URL}/orders/{packetId}`
 
 ### URL Parameters
 
