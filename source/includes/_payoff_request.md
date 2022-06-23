@@ -44,29 +44,3 @@ vehicleMileage | The customer's mileage on the vehicle | N | N
 vin | Vehicle Identification Number | Y | N
 
 **Note: Some lenders require Account Number and/or Social Security Number to successfully return the payoff.**
-
-
-## Cancel Request
-
-> This route returns the following object:
-
-```json
-{
-  "payoffId": "98efa558-4f62-4917-9aff-76ed0c4effa8",
-  "success": true
-}
-```
-
-**This route is only available when subscribed to our Fulfillment Center.**
-
-This route can be utilized to cancel an ongoing request in our system.
-
-### HTTP Request
-
-`DELETE https://{YOUR_BASE_URL}/payoff/{payoffId}`
-
-### Request Parameters
-
-Parameter | Description | Required?
-----------| ----------- | ---------
-payoffId | LossExpress payoff request UUID | Y

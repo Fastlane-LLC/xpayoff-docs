@@ -103,7 +103,7 @@ Where STRINGIFIED_REQUEST is the JSON of the request body (with no padding/white
   "packetId": "a18854a1-ee1c-4ce5-817e-4307ae029894",
   "orderType": "Bill of Sale",
   "orderId": "467eaac4-9a34-480c-85e4-b8da79184a2f",
-  "documentUrl": "http://{YOUR_BASE_URL}}/documents/f02e4050-6596-46ed-bf1e-0456403964af",
+  "documentUrl": "https://{YOUR_BASE_URL}/documents/f02e4050-6596-46ed-bf1e-0456403964af",
   "success": true,
   "fulfilledBy": "fulfillment center",
   "customerAuthorizationAttempted": false
@@ -162,7 +162,7 @@ The body of the request sent to the webhook will be a JSON object with the follo
 
 | Key                            | Description                                                                                                                                                 | Example                                |
 |--------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------|
-| packetId                       | The LossExpress UUID                                                                                                                                        | `"f94bbd89-e9e0-45ac-a02b-e4d4afad6a8f"` |
+| packetId                       | The LossExpress UUID (A `packet` is a grouping of orders)                                                                                                     | `"f94bbd89-e9e0-45ac-a02b-e4d4afad6a8f"` |
 | payoffId                       | The LossExpress UUID (Same as above - will be deprecated in future)                                                                                         | `"f94bbd89-e9e0-45ac-a02b-e4d4afad6a8f"` |
 | orderId                        | The LossExpress UUID for the specific order                                                                                                                 | `"61951010-d4a0-48b3-86b6-3908da2b0800"` |
 | orderType                      | The type of order that has been requested                                                                                                                   | `"Payoff Request"`                       |
@@ -194,8 +194,8 @@ The body of the request sent to the webhook will be a JSON object with the follo
 | dateReceived                   | The date received on a Payment Status request                                                                                                               | `"2022-05-12"`
 | dateDeposited                  | The date deposited on a Payment Status request                                                                                                              | `"2022-05-12"`
 | paymentDeposited               | Can be `true` or `false` depending on whether the payment was deposited on a Payment Status Request`                                                        | `true`
-| paymentMailingAddress          | An object consisting of `streetAddress`, `city`, `state`, `zipCode` for a Payment Status request                                                                  |
-| documentUrl | The URL that can be used as a `GET` request to retrieve your requested digital document | `"https://{YOUR_BASE_URL}/documents/f02e4050-6596-46ed-bf1e-0456403964a"`
+| paymentMailingAddress          | An object consisting of `streetAddress`, `city`, `state`, `zipCode` for a Payment Status request                                                            |
+| documentUrl | The URL that can be used as a `GET` request to retrieve your requested digital document                                                                     | `"https://{YOUR_BASE_URL}/documents/f02e4050-6596-46ed-bf1e-0456403964a"`
 
 
 <aside class="notice">
@@ -219,6 +219,6 @@ Below are the current list of messages that could be returned when we run into a
 - Social Security number required (last 4)
 - Unable to find account
 - Wait time too long
-  Wrong email
+- Wrong email
 - Wrong fax
 - Wrong phone number
