@@ -16,6 +16,14 @@ code_clipboard: true
 
 Welcome to the LossExpress xPayoff API! You can utilize this API to get pertinent information regarding a consumer's vehicle loan.
 
+# Updates
+ 
+**2022-06-29**
+
+- Adds [orders](#orders) for xData clients
+- New [cancel routes](#cancel-order-request) for payoff requests and orders
+- New [Test VINs](#testing) for orders
+
 # Testing
 
 Depending on the configuration of your instance, please use one of the following as your base URL:

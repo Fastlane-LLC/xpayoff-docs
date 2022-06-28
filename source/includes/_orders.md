@@ -18,16 +18,16 @@ This route returns an array of strings, which consists of the current types of o
 
 Order Type | Description                      | 
 ----------|------------------------|
-Bill of Sale | Digital copy sent to you
-Finance/Lease Agreement | Digital copy sent to you
-Lien Release Letter | Digital copy sent to you
-One and the Same Letter | Digital copy sent to you
-Payment History | Digital copy sent to you
-Payment Status | Information regarding a consumer's vehicle loan
-Repo Affidavit | Digital copy sent to you
-Title Image | Digital copy sent to you
-Title Status | We will request lender to mail the title to you
-Payoff Request | We let lender know you are mailing the payment and ask if they have received it
+Payoff Request | Information regarding a consumer's vehicle loan
+Bill of Sale | Digital copy
+Finance/Lease Agreement | Digital copy
+Lien Release Letter | Digital copy
+One and the Same Letter | Digital copy
+Payment History | Digital copy
+Repo Affidavit | Digital copy
+Title Image | Digital copy
+Payment Status | Inform lender a payoff has been mailed, and the status of its delivery
+Title Status | Request lender to mail the title
 
 
 ## Create Order(s) Request
