@@ -309,6 +309,9 @@
             <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
           </li>
           <li>
+            <a href="#updates" class="toc-h1 toc-link" data-title="Updates">Updates</a>
+          </li>
+          <li>
             <a href="#testing" class="toc-h1 toc-link" data-title="Testing">Testing</a>
           </li>
           <li>
@@ -337,13 +340,27 @@
               </ul>
           </li>
           <li>
+            <a href="#orders" class="toc-h1 toc-link" data-title="Orders">Orders</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#fetch-order-types" class="toc-h2 toc-link" data-title="Fetch Order Types">Fetch Order Types</a>
+                  </li>
+                  <li>
+                    <a href="#create-order-s-request" class="toc-h2 toc-link" data-title="Create Order(s) Request">Create Order(s) Request</a>
+                  </li>
+                  <li>
+                    <a href="#cancel-order-request" class="toc-h2 toc-link" data-title="Cancel Order Request">Cancel Order Request</a>
+                  </li>
+                  <li>
+                    <a href="#cancel-packet-request" class="toc-h2 toc-link" data-title="Cancel Packet Request">Cancel Packet Request</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#loan-payoff-request" class="toc-h1 toc-link" data-title="Loan Payoff Request">Loan Payoff Request</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#create-request" class="toc-h2 toc-link" data-title="Create Request">Create Request</a>
-                  </li>
-                  <li>
-                    <a href="#cancel-request" class="toc-h2 toc-link" data-title="Cancel Request">Cancel Request</a>
                   </li>
               </ul>
           </li>
@@ -357,6 +374,14 @@
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
 <p>Welcome to the LossExpress xPayoff API! You can utilize this API to get pertinent information regarding a consumer&#39;s vehicle loan.</p>
+<h1 id='updates'>Updates</h1>
+<p><strong>2022-06-29</strong></p>
+
+<ul>
+<li>Adds <a href="#orders">orders</a> for xData clients</li>
+<li>New <a href="#cancel-order-request">cancel routes</a> for payoff requests and orders</li>
+<li>New <a href="#testing">Test VINs</a> for orders</li>
+</ul>
 <h1 id='testing'>Testing</h1>
 <p>Depending on the configuration of your instance, please use one of the following as your base URL:</p>
 
@@ -372,8 +397,8 @@
 </tr>
 </tbody></table>
 
-<p>The following Test VINs can be used on both instances when making a payoff request. 
-See <a href="#loan-payoff-request">Loan Payoff Request</a> and <a href="##webhook-body">Webhook Body</a> for more details.</p>
+<p>The following Test VINs can be used on both instances when making either a payoff request or xData order. 
+See <a href="#loan-payoff-request">Loan Payoff Request</a>, <a href="#create-order-s-request">Create Order(s) Request</a>, and <a href="#webhook-body">Webhook Body</a> for more details.</p>
 
 <table><thead>
 <tr>
@@ -405,6 +430,18 @@ See <a href="#loan-payoff-request">Loan Payoff Request</a> and <a href="##webhoo
 <td><code>1N4AL3AP8JC231503</code></td>
 <td>Automated Payoff Quote</td>
 </tr>
+<tr>
+<td><code>DX3AA08D68N901917</code></td>
+<td>&#39;Title Status&#39; Webhook (xData only)</td>
+</tr>
+<tr>
+<td><code>DXHDU4AD4AU955646</code></td>
+<td>&#39;Payment Status&#39; Webhook (xData only)</td>
+</tr>
+<tr>
+<td><code>DXWRA69M74M033915</code></td>
+<td>Document Order Webhook (&#39;Lien Release Letter&#39;, &#39;Finance/Lease Agreement&#39;, &#39;Title Image&#39;, &#39;Bill of Sale&#39;, &#39;Repo Affidavit&#39;, &#39;One and the Same Letter&#39;, &#39;Payment History&#39;) (xData only)</td>
+</tr>
 </tbody></table>
 <h1 id='authentication'>Authentication</h1>
 <p>Our xPayoff API utilizes a simple API key-based authentication, where the key (generated from our developer interface) must be passed in the Authorization header like so:</p>
@@ -428,7 +465,7 @@ See <a href="#loan-payoff-request">Loan Payoff Request</a> and <a href="##webhoo
 <p>Where STRINGIFIED_REQUEST is the JSON of the request body (with no padding/whitespace) and PAYOFF_ID is the payoff ID for the particular request. This signature is signed with your API key and can be used to validate that the request came from LossExpress.</p>
 <h2 id='webhook-body'>Webhook Body</h2>
 <blockquote>
-<p>Example Body:</p>
+<p>Example &quot;Payoff Request&quot; Webhook Body:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"packetId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f94bbd89-e9e0-45ac-a02b-e4d4afad6a8f"</span><span class="p">,</span><span class="w">
@@ -453,6 +490,64 @@ See <a href="#loan-payoff-request">Loan Payoff Request</a> and <a href="##webhoo
   </span><span class="nl">"customerAuthorizationAttempted"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
+<blockquote>
+<p>Example Document Order Type Webhook Body:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"packetId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a18854a1-ee1c-4ce5-817e-4307ae029894"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bill of Sale"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"467eaac4-9a34-480c-85e4-b8da79184a2f"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"documentUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{YOUR_BASE_URL}/documents/f02e4050-6596-46ed-bf1e-0456403964af"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"fulfilledBy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fulfillment center"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"customerAuthorizationAttempted"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Example &quot;Payment Status&quot; Webhook Body:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"packetId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"29782bd1-3d7c-43db-ace9-1182ee65a29a"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Payment Status"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6eb55f20-4d2b-4bd4-8f9c-271842f2852c"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"paymentReceived"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"dateReceived"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-05-12"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"paymentDeposited"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"dateDeposited"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-05-05"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"paymentMailingAddress"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"streetAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"P.O. Box 660443"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dallas"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"zipCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"75265"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TX"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"fulfilledBy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fulfillment center"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"customerAuthorizationAttempted"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Example &quot;Title Status&quot; Webhook Body:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"packetId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"29782bd1-3d7c-43db-ace9-1182ee65a29a"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Title Status"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"85a4796f-a970-4968-a5ff-77b5b4410dab"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"trackingNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"340-7-52607790A-PKG1OF1"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"titleSent"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"dateSent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-05-19"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"titleDeliveryScheduled"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-05-12"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"deliveryType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UPS"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"titleAddress"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"streetAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"P.O. Box 660443"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dallas"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"zipCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"75265"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TX"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"fulfilledBy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fulfillment center"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"customerAuthorizationAttempted"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
 <p>The body of the request sent to the webhook will be a JSON object with the following possible keys:</p>
 
 <table><thead>
@@ -464,23 +559,23 @@ See <a href="#loan-payoff-request">Loan Payoff Request</a> and <a href="##webhoo
 </thead><tbody>
 <tr>
 <td>packetId</td>
-<td>The LossExpress UUID</td>
-<td><code>f94bbd89-e9e0-45ac-a02b-e4d4afad6a8f</code></td>
+<td>The LossExpress UUID (A <code>packet</code> is a grouping of orders)</td>
+<td><code>&quot;f94bbd89-e9e0-45ac-a02b-e4d4afad6a8f&quot;</code></td>
 </tr>
 <tr>
 <td>payoffId</td>
 <td>The LossExpress UUID (Same as above - will be deprecated in future)</td>
-<td><code>f94bbd89-e9e0-45ac-a02b-e4d4afad6a8f</code></td>
+<td><code>&quot;f94bbd89-e9e0-45ac-a02b-e4d4afad6a8f&quot;</code></td>
 </tr>
 <tr>
 <td>orderId</td>
 <td>The LossExpress UUID for the specific order</td>
-<td><code>61951010-d4a0-48b3-86b6-3908da2b0800</code></td>
+<td><code>&quot;61951010-d4a0-48b3-86b6-3908da2b0800&quot;</code></td>
 </tr>
 <tr>
 <td>orderType</td>
 <td>The type of order that has been requested</td>
-<td><code>Payoff Request</code></td>
+<td><code>&quot;Payoff Request&quot;</code></td>
 </tr>
 <tr>
 <td>payoffAmount</td>
@@ -495,17 +590,17 @@ See <a href="#loan-payoff-request">Loan Payoff Request</a> and <a href="##webhoo
 <tr>
 <td>validThroughDate</td>
 <td>A JSON timestamp for the valid through date</td>
-<td><code>2020-08-22T00:00:00.000Z</code></td>
+<td><code>&quot;2020-08-22T00:00:00.000Z&quot;</code></td>
 </tr>
 <tr>
 <td>lenderPhoneNumber</td>
 <td>A valid phone number for the lender</td>
-<td><code>+12223334444</code></td>
+<td><code>&quot;+12223334444&quot;</code></td>
 </tr>
 <tr>
 <td>checkPayableTo</td>
 <td>To whom the check is payable to</td>
-<td><code>+12223334444</code></td>
+<td><code>&quot;+12223334444&quot;</code></td>
 </tr>
 <tr>
 <td>standardMailingAddress</td>
@@ -535,17 +630,17 @@ See <a href="#loan-payoff-request">Loan Payoff Request</a> and <a href="##webhoo
 <tr>
 <td>eftState</td>
 <td>The state, as it relates to EFT</td>
-<td><code>TX</code></td>
+<td><code>&quot;TX&quot;</code></td>
 </tr>
 <tr>
 <td>eftCity</td>
 <td>The city, as it relates to EFT</td>
-<td><code>DALLAS</code></td>
+<td><code>&quot;DALLAS&quot;</code></td>
 </tr>
 <tr>
 <td>eftZipCode</td>
 <td>The ZIP code, as it relates to EFT</td>
-<td><code>75204</code></td>
+<td><code>&quot;75204&quot;</code></td>
 </tr>
 <tr>
 <td>success</td>
@@ -560,12 +655,77 @@ See <a href="#loan-payoff-request">Loan Payoff Request</a> and <a href="##webhoo
 <tr>
 <td>fulfilledBy</td>
 <td>Can be <code>&quot;integration&quot;</code> or <code>&quot;fulfillment center&quot;</code>, depending on how the payoff was fulfilled</td>
-<td><code>integration</code></td>
+<td><code>&quot;integration&quot;</code></td>
 </tr>
 <tr>
 <td>customerAuthorizationAttempted</td>
 <td>Can be <code>true</code> or <code>false</code>, depending on whether verbal customer authorization was utilized to retrieve the payoff. Disabled at the company level by default.</td>
 <td><code>false</code></td>
+</tr>
+<tr>
+<td>status</td>
+<td>The current status for an order when receiving an Customer Authorization attempt webhook (attempts must be enabled)</td>
+<td><code>&quot;pending&quot;</code></td>
+</tr>
+<tr>
+<td>attempt</td>
+<td>Will return <code>true</code> if the webhook received is a Customer Authorization attempt (attempts must be enabled)</td>
+<td></td>
+</tr>
+<tr>
+<td>trackingNumber</td>
+<td>The tracking number for a mailed Title Status request</td>
+<td><code>&quot;340-7-52607790A-PKG1OF1&quot;</code></td>
+</tr>
+<tr>
+<td>titleSent</td>
+<td>Can be <code>true</code> or <code>false</code> depending on whether Title Status has been mailed</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td>dateSent</td>
+<td>The date sent for a mailed Title Status request</td>
+<td><code>&quot;2022-05-19&quot;</code></td>
+</tr>
+<tr>
+<td>titleDeliveryScheduled</td>
+<td>The schedule delivery date for a mailed Title Status request</td>
+<td><code>&quot;2022-05-21&quot;</code></td>
+</tr>
+<tr>
+<td>titleAddress</td>
+<td>An object consisting of <code>streetAddress</code>, <code>city</code>, <code>state</code>, <code>zipCode</code> for a Title Status request</td>
+<td></td>
+</tr>
+<tr>
+<td>paymentReceived</td>
+<td>Can be <code>true</code> or <code>false</code> depending on whether payment is received on a Payment Status request</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td>dateReceived</td>
+<td>The date received on a Payment Status request</td>
+<td><code>&quot;2022-05-12&quot;</code></td>
+</tr>
+<tr>
+<td>dateDeposited</td>
+<td>The date deposited on a Payment Status request</td>
+<td><code>&quot;2022-05-12&quot;</code></td>
+</tr>
+<tr>
+<td>paymentDeposited</td>
+<td>Can be <code>true</code> or <code>false</code> depending on whether the payment was deposited on a Payment Status Request`</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td>paymentMailingAddress</td>
+<td>An object consisting of <code>streetAddress</code>, <code>city</code>, <code>state</code>, <code>zipCode</code> for a Payment Status request</td>
+<td></td>
+</tr>
+<tr>
+<td>documentUrl</td>
+<td>The URL that can be used as a <code>GET</code> request to retrieve your requested digital document</td>
+<td><code>&quot;https://{YOUR_BASE_URL}/documents/f02e4050-6596-46ed-bf1e-0456403964a&quot;</code></td>
 </tr>
 </tbody></table>
 
@@ -588,8 +748,8 @@ See <a href="#loan-payoff-request">Loan Payoff Request</a> and <a href="##webhoo
 <li>Social Security number required</li>
 <li>Social Security number required (last 4)</li>
 <li>Unable to find account</li>
-<li>Wait time too long
-Wrong email</li>
+<li>Wait time too long</li>
+<li>Wrong email</li>
 <li>Wrong fax</li>
 <li>Wrong phone number</li>
 </ul>
@@ -663,24 +823,90 @@ Wrong email</li>
 <td>Name being queried against in LossExpress. Must be at least 3 characters long, and must be properly encoded</td>
 </tr>
 </tbody></table>
-<h1 id='loan-payoff-request'>Loan Payoff Request</h1><h2 id='create-request'>Create Request</h2>
+<h1 id='orders'>Orders</h1><h2 id='fetch-order-types'>Fetch Order Types</h2>
 <blockquote>
-<p>This route returns the following object:</p>
+<p>Fetch Order Types Request Example Response Body</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"payoffId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"98efa558-4f62-4917-9aff-76ed0c4effa8"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orderTypes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"...array of current order types"</span><span class="p">],</span><span class="w">
   </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<blockquote>
-<p>Note the <code>payoffId</code> returned, as it is a completely unique identifier for the request that will help you reconcile returns sent via the webhook.</p>
-</blockquote>
+<p>This route returns an array of strings, which consists of the current types of orders that can be requested.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>GET https://{YOUR_BASE_URL}/orders/order-types</code></p>
 
-<p>You can use this route to make a loan payoff request. Please note that although not every field is required, our query success rate increases with the more data provided to us.</p>
+<table><thead>
+<tr>
+<th>Order Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Payoff Request</td>
+<td>Information regarding a consumer&#39;s vehicle loan</td>
+</tr>
+<tr>
+<td>Bill of Sale</td>
+<td>Digital copy</td>
+</tr>
+<tr>
+<td>Finance/Lease Agreement</td>
+<td>Digital copy</td>
+</tr>
+<tr>
+<td>Lien Release Letter</td>
+<td>Digital copy</td>
+</tr>
+<tr>
+<td>One and the Same Letter</td>
+<td>Digital copy</td>
+</tr>
+<tr>
+<td>Payment History</td>
+<td>Digital copy</td>
+</tr>
+<tr>
+<td>Repo Affidavit</td>
+<td>Digital copy</td>
+</tr>
+<tr>
+<td>Title Image</td>
+<td>Digital copy</td>
+</tr>
+<tr>
+<td>Payment Status</td>
+<td>Inform lender a payoff has been mailed, and the status of its delivery</td>
+</tr>
+<tr>
+<td>Title Status</td>
+<td>Request lender to mail the title</td>
+</tr>
+</tbody></table>
+<h2 id='create-order-s-request'>Create Order(s) Request</h2>
+<blockquote>
+<p>Create Order(s) Request Example Response Body:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"packetId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c30ae9da-9222-4de5-81fe-fe1ac590fa0f"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orders"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Payoff Request"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3e8c38f3-f4ef-4414-88da-1793d25ef6f0"</span><span class="p">,</span><span class="w">
+    </span><span class="p">},</span><span class="w"> 
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"77462941-7b6c-4bd0-9749-588c32654864"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bill of Sale"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>You can use this route to make a loan payoff request as well as additional order types if subscribed to xData. Please note that although not every field is required, our query success rate increases with the more data provided to us.</p>
 
 <p>Please note that if you are subscribed to our Fulfillment Center, high success rates require as much information as possible.</p>
-<h3 id='http-request'>HTTP Request</h3>
-<p><code>POST https://{YOUR_BASE_URL}/payoff</code></p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>POST https://{YOUR_BASE_URL}/orders</code></p>
 <h3 id='request-body'>Request Body</h3>
 <p>This route accepts a JSON payload of an object comprising of:</p>
 
@@ -694,7 +920,7 @@ Wrong email</li>
 </thead><tbody>
 <tr>
 <td>accountNumber</td>
-<td>The account number for the loan; we may not be able to obtain payoffs without this in some cases</td>
+<td>The account number for the loan; we may not be able to obtain payoffs without this in some cases, ex: <code>&quot;123456&quot;</code></td>
 <td>N</td>
 <td>N</td>
 </tr>
@@ -712,13 +938,13 @@ Wrong email</li>
 </tr>
 <tr>
 <td>customerBirthdate</td>
-<td>The birthdate of the customer for the loan</td>
+<td>The birthdate of the customer for the loan, ex: <code>&quot;YYYY-MM-DD&quot;</code></td>
 <td>N</td>
 <td>N</td>
 </tr>
 <tr>
 <td>customerPhoneNumber</td>
-<td>The phone number of the customer for the loan</td>
+<td>The phone number of the customer for the loan, ex: <code>&quot;2125321234&quot;</code></td>
 <td>N</td>
 <td>N</td>
 </tr>
@@ -730,7 +956,7 @@ Wrong email</li>
 </tr>
 <tr>
 <td>financeType</td>
-<td>How the loan was financed, can be one of: <code>Retail</code> or <code>Lease</code></td>
+<td>How the loan was financed, can be one of: <code>&quot;Retail&quot;</code> or <code>&quot;Lease&quot;</code></td>
 <td>N</td>
 <td>N</td>
 </tr>
@@ -766,13 +992,13 @@ Wrong email</li>
 </tr>
 <tr>
 <td>socialSecurityNumber</td>
-<td>The customer&#39;s social security number, can be full or the last four</td>
+<td>The customer&#39;s social security number, can be full or the last four, ex: <code>&quot;434540594&quot;</code> (can include hyphens) or <code>&quot;1234&quot;</code></td>
 <td>N</td>
 <td>N</td>
 </tr>
 <tr>
 <td>vehicleMileage</td>
-<td>The customer&#39;s mileage on the vehicle</td>
+<td>The customer&#39;s mileage on the vehicle, must be a number value, ex: <code>25000</code></td>
 <td>N</td>
 <td>N</td>
 </tr>
@@ -782,10 +1008,81 @@ Wrong email</li>
 <td>Y</td>
 <td>N</td>
 </tr>
+<tr>
+<td>types</td>
+<td>An array of the types of orders for the request</td>
+<td>Y</td>
+<td>Y</td>
+</tr>
 </tbody></table>
 
 <p><strong>Note: Some lenders require Account Number and/or Social Security Number to successfully return the payoff.</strong></p>
-<h2 id='cancel-request'>Cancel Request</h2>
+<h2 id='cancel-order-request'>Cancel Order Request</h2>
+<blockquote>
+<p>Cancel Order Request Example Response Body:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orders"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"d7dfb949-073b-4424-8c7e-195f6f08352c"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bill of Sale"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cancelled"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This route allows cancellation of a particular order in event that it is no longer needed. </p>
+<h3 id='http-request-3'>HTTP Request</h3>
+<p><code>DELETE https://{YOUR_BASE_URL}/orders/cancel-order/{orderId}</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>orderId</td>
+<td>The LossExpress UUID associated with the order to be cancelled</td>
+</tr>
+</tbody></table>
+<h2 id='cancel-packet-request'>Cancel Packet Request</h2>
+<blockquote>
+<p>Cancel Packet Request Example Response Body:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orders"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"d932d1f0-656b-45d6-ae27-1e0904523b3f"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Payoff Request"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cancelled"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"45581b4d-4849-45ed-adc2-fdb7a333486c"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bill of Sale"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cancelled"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This route allows cancellation of an entire request, which will subsequently cancel all orders related to a packet.</p>
+<h3 id='http-request-4'>HTTP Request</h3>
+<p><code>DELETE https://{YOUR_BASE_URL}/orders/{packetId}</code></p>
+<h3 id='url-parameters-2'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>packetId</td>
+<td>The LossExpress UUID associated with the packet to be cancelled</td>
+</tr>
+</tbody></table>
+<h1 id='loan-payoff-request'>Loan Payoff Request</h1><h2 id='create-request'>Create Request</h2>
 <blockquote>
 <p>This route returns the following object:</p>
 </blockquote>
@@ -794,25 +1091,119 @@ Wrong email</li>
   </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p><strong>This route is only available when subscribed to our Fulfillment Center.</strong></p>
+<blockquote>
+<p>Note the <code>payoffId</code> returned, as it is a completely unique identifier for the request that will help you reconcile returns sent via the webhook.</p>
+</blockquote>
 
-<p>This route can be utilized to cancel an ongoing request in our system.</p>
-<h3 id='http-request-2'>HTTP Request</h3>
-<p><code>DELETE https://{YOUR_BASE_URL}/payoff/{payoffId}</code></p>
-<h3 id='request-parameters'>Request Parameters</h3>
+<p>You can use this route to make a loan payoff request. Please note that although not every field is required, our query success rate increases with the more data provided to us.</p>
+
+<p>Please note that if you are subscribed to our Fulfillment Center, high success rates require as much information as possible.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>POST https://{YOUR_BASE_URL}/payoff</code></p>
+<h3 id='request-body'>Request Body</h3>
+<p>This route accepts a JSON payload of an object comprising of:</p>
+
 <table><thead>
 <tr>
-<th>Parameter</th>
+<th>Body Parameter</th>
 <th>Description</th>
 <th>Required?</th>
+<th>Fulfillment Center Only</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>payoffId</td>
-<td>LossExpress payoff request UUID</td>
+<td>accountNumber</td>
+<td>The account number for the loan; we may not be able to obtain payoffs without this in some cases, ex: <code>&quot;123456&quot;</code></td>
+<td>N</td>
+<td>N</td>
+</tr>
+<tr>
+<td>customerName</td>
+<td>The name of the customer for the loan</td>
+<td>N</td>
+<td>N</td>
+</tr>
+<tr>
+<td>customerAddress</td>
+<td>The address of the customer for the loan</td>
+<td>N</td>
+<td>N</td>
+</tr>
+<tr>
+<td>customerBirthdate</td>
+<td>The birthdate of the customer for the loan, ex: <code>&quot;YYYY-MM-DD&quot;</code></td>
+<td>N</td>
+<td>N</td>
+</tr>
+<tr>
+<td>customerPhoneNumber</td>
+<td>The phone number of the customer for the loan, ex: <code>&quot;2125321234&quot;</code></td>
+<td>N</td>
+<td>N</td>
+</tr>
+<tr>
+<td>entityName</td>
+<td>The name of the organization, dealership, lender, or other entity that is requesting the payoff information for their own purposes. This must be the organization that will act on the data.</td>
+<td>Y</td>
+<td>N</td>
+</tr>
+<tr>
+<td>financeType</td>
+<td>How the loan was financed, can be one of: <code>&quot;Retail&quot;</code> or <code>&quot;Lease&quot;</code></td>
+<td>N</td>
+<td>N</td>
+</tr>
+<tr>
+<td>lenderId</td>
+<td>The LossExpress Lender UUID. You can receive this UUID by utilizing our lender search functionality</td>
+<td>Y</td>
+<td>N</td>
+</tr>
+<tr>
+<td>lenderName</td>
+<td>A lender name, if a corresponding lender is not in our lender database; this will enter the lender into our queue for validation. Use lenderId whenever possible</td>
+<td>Y</td>
 <td>Y</td>
 </tr>
+<tr>
+<td>requesterEmailAddress</td>
+<td>The email address of the user requesting the data</td>
+<td>N</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>requesterName</td>
+<td>The name of the user requesting the data</td>
+<td>N</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>requesterPhoneNumber</td>
+<td>The phone number of the user requesting the data</td>
+<td>N</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>socialSecurityNumber</td>
+<td>The customer&#39;s social security number, can be full or the last four, ex: <code>&quot;434540594&quot;</code> (can include hyphens) or <code>&quot;1234&quot;</code></td>
+<td>N</td>
+<td>N</td>
+</tr>
+<tr>
+<td>vehicleMileage</td>
+<td>The customer&#39;s mileage on the vehicle, must be a number value, ex: <code>25000</code></td>
+<td>N</td>
+<td>N</td>
+</tr>
+<tr>
+<td>vin</td>
+<td>Vehicle Identification Number</td>
+<td></td>
+<td></td>
+</tr>
 </tbody></table>
+
+<p><strong>Note: Some lenders require Account Number and/or Social Security Number to successfully return the payoff.</strong></p>
 <h1 id='errors'>Errors</h1>
 <blockquote>
 <p>400 Bad Request Example Error Response:</p>
