@@ -3,6 +3,7 @@ title: LossExpress xPayoff API
 
 includes:
   - lenders
+  - orders
   - payoff_request
   - errors
 
@@ -15,6 +16,14 @@ code_clipboard: true
 
 Welcome to the LossExpress xPayoff API! You can utilize this API to get pertinent information regarding a consumer's vehicle loan.
 
+# Updates
+ 
+**2022-06-29**
+
+- Adds [orders](#orders) for xData clients
+- New [cancel routes](#cancel-order-request) for payoff requests and orders
+- New [Test VINs](#testing) for orders
+
 # Testing
 
 Depending on the configuration of your instance, please use one of the following as your base URL:
@@ -23,8 +32,8 @@ Production URL | Development URL                   |
 ----------|---------------------------------|
 `https://xpayoff-api.lossexpress.com/` | `https://xpayoff-api-dev.lossexpress.com/` 
 
-The following Test VINs can be used on both instances when making a payoff request. 
-See [Loan Payoff Request](#loan-payoff-request) and [Webhook Body](##webhook-body) for more details.
+The following Test VINs can be used on both instances when making either a payoff request or xData order. 
+See [Loan Payoff Request](#loan-payoff-request), [Create Order(s) Request](#create-order-s-request), and [Webhook Body](#webhook-body) for more details.
 
 Test VIN | Outcome                                          | 
 ----------|--------------------------------------------|
@@ -34,6 +43,9 @@ Test VIN | Outcome                                          |
 `3LNHL2JC5CR800827` | Automated Payoff Quote 
 `ZA9RU31B9XLA12448` | Automated Payoff Quote 
 `1N4AL3AP8JC231503` | Automated Payoff Quote
+`DX3AA08D68N901917` | 'Title Status' Webhook (xData only)
+`DXHDU4AD4AU955646` | 'Payment Status' Webhook (xData only)
+`DXWRA69M74M033915` | Document Order Webhook ('Lien Release Letter', 'Finance/Lease Agreement', 'Title Image', 'Bill of Sale', 'Repo Affidavit', 'One and the Same Letter', 'Payment History') (xData only)
 
 # Authentication
 
@@ -65,7 +77,7 @@ Where STRINGIFIED_REQUEST is the JSON of the request body (with no padding/white
 
 ## Webhook Body
 
-> Example Body:
+> Example "Payoff Request" Webhook Body:
 
 ```json
 {
@@ -92,32 +104,108 @@ Where STRINGIFIED_REQUEST is the JSON of the request body (with no padding/white
 }
 ```
 
+> Example Document Order Type Webhook Body:
+
+```json
+{
+  "packetId": "a18854a1-ee1c-4ce5-817e-4307ae029894",
+  "orderType": "Bill of Sale",
+  "orderId": "467eaac4-9a34-480c-85e4-b8da79184a2f",
+  "documentUrl": "https://{YOUR_BASE_URL}/documents/f02e4050-6596-46ed-bf1e-0456403964af",
+  "success": true,
+  "fulfilledBy": "fulfillment center",
+  "customerAuthorizationAttempted": false
+}
+```
+
+> Example "Payment Status" Webhook Body:
+
+```json
+{
+  "packetId": "29782bd1-3d7c-43db-ace9-1182ee65a29a",
+  "orderType": "Payment Status",
+  "orderId": "6eb55f20-4d2b-4bd4-8f9c-271842f2852c",
+  "paymentReceived": true,
+  "dateReceived": "2022-05-12",
+  "paymentDeposited": true,
+  "dateDeposited": "2022-05-05",
+  "paymentMailingAddress": {
+    "streetAddress": "P.O. Box 660443",
+    "city": "Dallas",
+    "zipCode": "75265",
+    "state": "TX"
+  },
+  "success": true,
+  "fulfilledBy": "fulfillment center",
+  "customerAuthorizationAttempted": false
+}
+```
+
+> Example "Title Status" Webhook Body:
+
+```json
+{
+  "packetId": "29782bd1-3d7c-43db-ace9-1182ee65a29a",
+  "orderType": "Title Status",
+  "orderId": "85a4796f-a970-4968-a5ff-77b5b4410dab",
+  "trackingNumber": "340-7-52607790A-PKG1OF1",
+  "titleSent": true,
+  "dateSent": "2022-05-19",
+  "titleDeliveryScheduled": "2022-05-12",
+  "deliveryType": "UPS",
+  "titleAddress": {
+    "streetAddress": "P.O. Box 660443",
+    "city": "Dallas",
+    "zipCode": "75265",
+    "state": "TX"
+  },
+  "success": true,
+  "fulfilledBy": "fulfillment center",
+  "customerAuthorizationAttempted": false
+}
+```
+
+
 The body of the request sent to the webhook will be a JSON object with the following possible keys:
 
-| Key                            | Description                                                                                                                                                | Example                                |
-|--------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------|
-| packetId                       | The LossExpress UUID                                                                                                                                       | `f94bbd89-e9e0-45ac-a02b-e4d4afad6a8f` |
-| payoffId                       | The LossExpress UUID (Same as above - will be deprecated in future)                                                                                        | `f94bbd89-e9e0-45ac-a02b-e4d4afad6a8f` |
-| orderId                        | The LossExpress UUID for the specific order                                                                                                                | `61951010-d4a0-48b3-86b6-3908da2b0800` |
-| orderType                      | The type of order that has been requested                                                                                                                  | `Payoff Request`                             |
-| payoffAmount                   | A number containing the amount remaining on the loan                                                                                                       | `10222.33`                             |
-| perDiem                        | The per diem for the particular loan                                                                                                                       | `2.33`                                 |
-| validThroughDate               | A JSON timestamp for the valid through date                                                                                                                | `2020-08-22T00:00:00.000Z`             |
-| lenderPhoneNumber              | A valid phone number for the lender                                                                                                                        | `+12223334444`                         |
-| checkPayableTo                 | To whom the check is payable to                                                                                                                            | `+12223334444`                         |
-| standardMailingAddress         | Contains a standard mailing address for the lender                                                                                                         |
-| overnightMailingAddress        | Contains an overnight mailing address for the lender                                                                                                       |
-| accountNumber                  | Contains the account number for the account as provided by the lender                                                                                      |
-| eftAccountNumber               | An account number for EFT                                                                                                                                  |
-| eftRoutingNumber               | A routing number for EFT                                                                                                                                   |
-| eftState                       | The state, as it relates to EFT                                                                                                                            | `TX`                                   |
-| eftCity                        | The city, as it relates to EFT                                                                                                                             | `DALLAS`                               |
-| eftZipCode                     | The ZIP code, as it relates to EFT                                                                                                                         | `75204`                                |
-| success                        | A boolean, stating whether we were able to retrieve the payoff or not                                                                                      | `true`                                 |
-| errorMessage                   | If success is false, we will attempt to provide an error message                                                                                           |
-| fulfilledBy                    | Can be `"integration"` or `"fulfillment center"`, depending on how the payoff was fulfilled                                                                | `integration`                          |
+| Key                            | Description                                                                                                                                                 | Example                                |
+|--------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------|
+| packetId                       | The LossExpress UUID (A `packet` is a grouping of orders)                                                                                                     | `"f94bbd89-e9e0-45ac-a02b-e4d4afad6a8f"` |
+| payoffId                       | The LossExpress UUID (Same as above - will be deprecated in future)                                                                                         | `"f94bbd89-e9e0-45ac-a02b-e4d4afad6a8f"` |
+| orderId                        | The LossExpress UUID for the specific order                                                                                                                 | `"61951010-d4a0-48b3-86b6-3908da2b0800"` |
+| orderType                      | The type of order that has been requested                                                                                                                   | `"Payoff Request"`                       |
+| payoffAmount                   | A number containing the amount remaining on the loan                                                                                                        | `10222.33`                             |
+| perDiem                        | The per diem for the particular loan                                                                                                                        | `2.33`                                 |
+| validThroughDate               | A JSON timestamp for the valid through date                                                                                                                 | `"2020-08-22T00:00:00.000Z"`             |
+| lenderPhoneNumber              | A valid phone number for the lender                                                                                                                         | `"+12223334444"`                         |
+| checkPayableTo                 | To whom the check is payable to                                                                                                                             | `"+12223334444"`                         |
+| standardMailingAddress         | Contains a standard mailing address for the lender                                                                                                          |
+| overnightMailingAddress        | Contains an overnight mailing address for the lender                                                                                                        |
+| accountNumber                  | Contains the account number for the account as provided by the lender                                                                                       |
+| eftAccountNumber               | An account number for EFT                                                                                                                                   |
+| eftRoutingNumber               | A routing number for EFT                                                                                                                                    |
+| eftState                       | The state, as it relates to EFT                                                                                                                             | `"TX"`                                   |
+| eftCity                        | The city, as it relates to EFT                                                                                                                              | `"DALLAS"`                               |
+| eftZipCode                     | The ZIP code, as it relates to EFT                                                                                                                          | `"75204"`                                |
+| success                        | A boolean, stating whether we were able to retrieve the payoff or not                                                                                       | `true`                                 |
+| errorMessage                   | If success is false, we will attempt to provide an error message                                                                                            |
+| fulfilledBy                    | Can be `"integration"` or `"fulfillment center"`, depending on how the payoff was fulfilled                                                                 | `"integration"`                          |
 | customerAuthorizationAttempted | Can be `true` or `false`, depending on whether verbal customer authorization was utilized to retrieve the payoff. Disabled at the company level by default. | `false`                                |
-  
+| status                         | The current status for an order when receiving an Customer Authorization attempt webhook (attempts must be enabled)                                         | `"pending"`                              |
+| attempt                        | Will return `true` if the webhook received is a Customer Authorization attempt (attempts must be enabled)                                                   
+| trackingNumber                 | The tracking number for a mailed Title Status request                                                                                                       | `"340-7-52607790A-PKG1OF1"`
+| titleSent                      | Can be `true` or `false` depending on whether Title Status has been mailed                                                                                  | `true`
+| dateSent                       | The date sent for a mailed Title Status request                                                                                                             | `"2022-05-19"`
+| titleDeliveryScheduled         | The schedule delivery date for a mailed Title Status request                                                                                                | `"2022-05-21"`
+| titleAddress                   | An object consisting of `streetAddress`, `city`, `state`, `zipCode` for a Title Status request                                                              |
+| paymentReceived                | Can be `true` or `false` depending on whether payment is received on a Payment Status request                                                               | `true`
+| dateReceived                   | The date received on a Payment Status request                                                                                                               | `"2022-05-12"`
+| dateDeposited                  | The date deposited on a Payment Status request                                                                                                              | `"2022-05-12"`
+| paymentDeposited               | Can be `true` or `false` depending on whether the payment was deposited on a Payment Status Request`                                                        | `true`
+| paymentMailingAddress          | An object consisting of `streetAddress`, `city`, `state`, `zipCode` for a Payment Status request                                                            |
+| documentUrl | The URL that can be used as a `GET` request to retrieve your requested digital document                                                                     | `"https://{YOUR_BASE_URL}/documents/f02e4050-6596-46ed-bf1e-0456403964a"`
+
+
 <aside class="notice">
   Only `payoffId` and `success` are guaranteed to be in any given webhook body sent.
 </aside>
@@ -139,6 +227,6 @@ Below are the current list of messages that could be returned when we run into a
 - Social Security number required (last 4)
 - Unable to find account
 - Wait time too long
-  Wrong email
+- Wrong email
 - Wrong fax
 - Wrong phone number
