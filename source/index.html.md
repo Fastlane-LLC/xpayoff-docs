@@ -17,7 +17,11 @@ code_clipboard: true
 Welcome to the LossExpress xPayoff API! You can utilize this API to get pertinent information regarding a consumer's vehicle loan.
 
 # Updates
- 
+
+**2022-08-01**
+
+- New [Test VIN](#testing) for example payoff request errors
+
 **2022-06-29**
 
 - Adds [orders](#orders) for xData clients
@@ -43,6 +47,7 @@ Test VIN | Outcome                                          |
 `3LNHL2JC5CR800827` | Automated Payoff Quote 
 `ZA9RU31B9XLA12448` | Automated Payoff Quote 
 `1N4AL3AP8JC231503` | Automated Payoff Quote
+`DX4AH51N1K6437778` | Payoff Quote Error Example
 `DX3AA08D68N901917` | 'Title Status' Webhook (xData only)
 `DXHDU4AD4AU955646` | 'Payment Status' Webhook (xData only)
 `DXWRA69M74M033915` | Document Order Webhook ('Lien Release Letter', 'Finance/Lease Agreement', 'Title Image', 'Bill of Sale', 'Repo Affidavit', 'One and the Same Letter', 'Payment History') (xData only)
