@@ -221,6 +221,7 @@ Below are the current list of messages that could be returned when we run into a
 
 - Account is in title perfection
 - Account number required
+- Account is a lease
 - Call dropped
 - Customer authorization required
 - Customer would not authorize
