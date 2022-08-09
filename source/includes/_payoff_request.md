@@ -27,13 +27,13 @@ This route accepts a JSON payload of an object comprising of:
 
 Body Parameter | Description                                                                                                                                                                                  | Required? | Fulfillment Center Only
 -------------- |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| --------- | -----------------------
-accountNumber | The account number for the loan; we may not be able to obtain payoffs without this in some cases, ex: `"123456"`                                                                              | N | N
+accountNumber | The account number for the loan; we may not be able to obtain payoffs without this in some cases, ex: `"123456"`                                                                             | N | N
 customerName | The name of the customer for the loan                                                                                                                                                        | N | N
 customerAddress | The address of the customer for the loan                                                                                                                                                     | N | N
 customerBirthdate | The birthdate of the customer for the loan, ex: `"YYYY-MM-DD"`                                                                                                                               | N | N
 customerPhoneNumber | The phone number of the customer for the loan, ex: `"2125321234"`                                                                                                                            | N | N
 entityName | The name of the organization, dealership, lender, or other entity that is requesting the payoff information for their own purposes. This must be the organization that will act on the data. | Y | N
-financeType | How the loan was financed, can be one of: `"Retail"` or `"Lease"`                                                                                                                            | N | N
+financeType | How the loan was financed, can be one of: `"Retail"` or `"Lease"` (Lease finance type is not supported at this time)                                                                         | N | N
 lenderId | The LossExpress Lender UUID. You can receive this UUID by utilizing our lender search functionality                                                                                          | Y | N
 lenderName | A lender name, if a corresponding lender is not in our lender database; this will enter the lender into our queue for validation. Use lenderId whenever possible                             | Y | Y
 requesterEmailAddress | The email address of the user requesting the data                                                                                                                                            | N | Y
