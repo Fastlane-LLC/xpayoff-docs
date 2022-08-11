@@ -228,7 +228,8 @@ Below are the current list of messages that could be returned when we run into a
 - Date of birth required
 - Lender would not release to a third party
 - Loan has been paid off
-- Request needs to be sent by fax
+- Required to be sent via email
+- Required to be sent via fax
 - Social Security number required
 - Social Security number required (last 4)
 - Unable to find account
