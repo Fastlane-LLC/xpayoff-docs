@@ -18,6 +18,10 @@ Welcome to the LossExpress xPayoff API! You can utilize this API to get pertinen
 
 # Updates
 
+**2022-08-16**
+
+- New `maxAttempts` boolean added to [Webhook Body](#webhook-body)
+
 **2022-08-01**
 
 - New [Test VIN](#testing) for example payoff request errors
@@ -175,7 +179,7 @@ The body of the request sent to the webhook will be a JSON object with the follo
 
 | Key                            | Description                                                                                                                                                 | Example                                |
 |--------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------|
-| packetId                       | The LossExpress UUID (A `packet` is a grouping of orders)                                                                                                     | `"f94bbd89-e9e0-45ac-a02b-e4d4afad6a8f"` |
+| packetId                       | The LossExpress UUID (A `packet` is a grouping of orders)                                                                                                   | `"f94bbd89-e9e0-45ac-a02b-e4d4afad6a8f"` |
 | payoffId                       | The LossExpress UUID (Same as above - will be deprecated in future)                                                                                         | `"f94bbd89-e9e0-45ac-a02b-e4d4afad6a8f"` |
 | orderId                        | The LossExpress UUID for the specific order                                                                                                                 | `"61951010-d4a0-48b3-86b6-3908da2b0800"` |
 | orderType                      | The type of order that has been requested                                                                                                                   | `"Payoff Request"`                       |
@@ -208,11 +212,12 @@ The body of the request sent to the webhook will be a JSON object with the follo
 | dateDeposited                  | The date deposited on a Payment Status request                                                                                                              | `"2022-05-12"`
 | paymentDeposited               | Can be `true` or `false` depending on whether the payment was deposited on a Payment Status Request`                                                        | `true`
 | paymentMailingAddress          | An object consisting of `streetAddress`, `city`, `state`, `zipCode` for a Payment Status request                                                            |
-| documentUrl | The URL that can be used as a `GET` request to retrieve your requested digital document                                                                     | `"https://{YOUR_BASE_URL}/documents/f02e4050-6596-46ed-bf1e-0456403964a"`
+| documentUrl                    | The URL that can be used as a `GET` request to retrieve your requested digital document                                                                     | `"https://{YOUR_BASE_URL}/documents/f02e4050-6596-46ed-bf1e-0456403964a"`
+| maxAttempts                    | A boolean set to `true` if no more attempts are available on the order to be fulfilled                                                                      |`true`
 
 
 <aside class="notice">
-  Only `payoffId` and `success` are guaranteed to be in any given webhook body sent.
+  Only `payoffId`, `packetId`, and `success` are guaranteed to be in any given webhook body sent.
 </aside>
 
 ### Error Messages (Fulfillment Center)
