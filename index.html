@@ -375,6 +375,12 @@
         <h1 id='introduction'>Introduction</h1>
 <p>Welcome to the LossExpress xPayoff API! You can utilize this API to get pertinent information regarding a consumer&#39;s vehicle loan.</p>
 <h1 id='updates'>Updates</h1>
+<p><strong>2022-08-16</strong></p>
+
+<ul>
+<li>New <code>maxAttempts</code> boolean added to <a href="#webhook-body">Webhook Body</a></li>
+</ul>
+
 <p><strong>2022-08-01</strong></p>
 
 <ul>
@@ -737,10 +743,15 @@ See <a href="#loan-payoff-request">Loan Payoff Request</a>, <a href="#create-ord
 <td>The URL that can be used as a <code>GET</code> request to retrieve your requested digital document</td>
 <td><code>&quot;https://{YOUR_BASE_URL}/documents/f02e4050-6596-46ed-bf1e-0456403964a&quot;</code></td>
 </tr>
+<tr>
+<td>maxAttempts</td>
+<td>A boolean set to <code>true</code> if no more attempts are available on the order to be fulfilled</td>
+<td><code>true</code></td>
+</tr>
 </tbody></table>
 
 <aside class="notice">
-  Only `payoffId` and `success` are guaranteed to be in any given webhook body sent.
+  Only `payoffId`, `packetId`, and `success` are guaranteed to be in any given webhook body sent.
 </aside>
 <h3 id='error-messages-fulfillment-center'>Error Messages (Fulfillment Center)</h3>
 <p>Below are the current list of messages that could be returned when we run into an issue gathering a payoff via our fulfillment center:</p>
