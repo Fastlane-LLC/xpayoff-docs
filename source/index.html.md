@@ -18,6 +18,10 @@ Welcome to the LossExpress xPayoff API! You can utilize this API to get pertinen
 
 # Updates
 
+**2022-08-24**
+
+- New `company` string and `attn` string added to standard and overnight addresses in [Webhook Body](#webhook-body)
+
 **2022-08-16**
 
 - New `maxAttempts` boolean added to [Webhook Body](#webhook-body)
@@ -100,9 +104,19 @@ Where STRINGIFIED_REQUEST is the JSON of the request body (with no padding/white
   "lenderPhoneNumber": "+12223334444",
   "checkPayableTo": "Jane Doe",
   "standardMailingAddress": {
+    "company": "Standard Lender",
     "attn": "John Doe",
     "streetAddress": "1000 Main Street",
     "streetAddress2": "Suite 900",
+    "city": "Dallas",
+    "state": "TX",
+    "zipCode": "75204"
+  },
+  "overnightMailingAddress": {
+    "company": "Overnight Lender",
+    "attn": "Jeremy Doe",
+    "streetAddress": "2000 Main Street",
+    "streetAddress2": "Suite 450",
     "city": "Dallas",
     "state": "TX",
     "zipCode": "75204"
@@ -188,8 +202,8 @@ The body of the request sent to the webhook will be a JSON object with the follo
 | validThroughDate               | A JSON timestamp for the valid through date                                                                                                                 | `"2020-08-22T00:00:00.000Z"`             |
 | lenderPhoneNumber              | A valid phone number for the lender                                                                                                                         | `"+12223334444"`                         |
 | checkPayableTo                 | To whom the check is payable to                                                                                                                             | `"+12223334444"`                         |
-| standardMailingAddress         | Contains a standard mailing address for the lender                                                                                                          |
-| overnightMailingAddress        | Contains an overnight mailing address for the lender                                                                                                        |
+| standardMailingAddress         | Object containing a standard mailing address for the lender, can contain the following keys: `company, attn, streetAddress, streetAddress2, city, state, zipCode`                                                                 |
+| overnightMailingAddress        | Object containing an overnight mailing address for the lender, can contain the following keys: `company, attn, streetAddress, streetAddress2, city, state, zipCode`                                                                                               |
 | accountNumber                  | Contains the account number for the account as provided by the lender                                                                                       |
 | eftAccountNumber               | An account number for EFT                                                                                                                                   |
 | eftRoutingNumber               | A routing number for EFT                                                                                                                                    |
