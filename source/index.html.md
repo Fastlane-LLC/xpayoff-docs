@@ -20,7 +20,7 @@ Welcome to the LossExpress xPayoff API! You can utilize this API to get pertinen
 
 **2022-08-24**
 
-- New `company` string and `attn` string added to standard and overnight addresses in [Webhook Body](#webhook-body)
+- New `company` key added to standard and overnight addresses in [Webhook Body](#webhook-body)
 
 **2022-08-16**
 
