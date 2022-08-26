@@ -18,6 +18,12 @@ Welcome to the LossExpress xPayoff API! You can utilize this API to get pertinen
 
 # Updates
 
+**2022-08-24**
+
+- New `company` key added to standard and overnight addresses in [Webhook Body](#webhook-body)
+- New `ownerName`, `coOwnerName`, and `titledState` keys added in [Webhook Body](#webhook-body)
+
+
 **2022-08-16**
 
 - New `maxAttempts` boolean added to [Webhook Body](#webhook-body)
@@ -94,15 +100,29 @@ Where STRINGIFIED_REQUEST is the JSON of the request body (with no padding/white
   "payoffId": "f94bbd89-e9e0-45ac-a02b-e4d4afad6a8f",
   "orderId": "61951010-d4a0-48b3-86b6-3908da2b0800",
   "orderType": "Payoff Request",
+  "accountNumber": "12345678",
+  "ownerName": "Jane Doe",
+  "coOwnerName": "John Doe",
+  "titledState": "CO",
   "payoffAmount": 10222.33,
   "perDiem": 2.33,
   "validThroughDate": "2020-08-22T00:00:00.000Z",
   "lenderPhoneNumber": "+12223334444",
   "checkPayableTo": "Jane Doe",
   "standardMailingAddress": {
+    "company": "Standard Lender",
     "attn": "John Doe",
     "streetAddress": "1000 Main Street",
     "streetAddress2": "Suite 900",
+    "city": "Dallas",
+    "state": "TX",
+    "zipCode": "75204"
+  },
+  "overnightMailingAddress": {
+    "company": "Overnight Lender",
+    "attn": "Jeremy Doe",
+    "streetAddress": "2000 Main Street",
+    "streetAddress2": "Suite 450",
     "city": "Dallas",
     "state": "TX",
     "zipCode": "75204"
@@ -177,43 +197,46 @@ Where STRINGIFIED_REQUEST is the JSON of the request body (with no padding/white
 
 The body of the request sent to the webhook will be a JSON object with the following possible keys:
 
-| Key                            | Description                                                                                                                                                 | Example                                |
-|--------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------|
-| packetId                       | The LossExpress UUID (A `packet` is a grouping of orders)                                                                                                   | `"f94bbd89-e9e0-45ac-a02b-e4d4afad6a8f"` |
-| payoffId                       | The LossExpress UUID (Same as above - will be deprecated in future)                                                                                         | `"f94bbd89-e9e0-45ac-a02b-e4d4afad6a8f"` |
-| orderId                        | The LossExpress UUID for the specific order                                                                                                                 | `"61951010-d4a0-48b3-86b6-3908da2b0800"` |
-| orderType                      | The type of order that has been requested                                                                                                                   | `"Payoff Request"`                       |
-| payoffAmount                   | A number containing the amount remaining on the loan                                                                                                        | `10222.33`                             |
-| perDiem                        | The per diem for the particular loan                                                                                                                        | `2.33`                                 |
-| validThroughDate               | A JSON timestamp for the valid through date                                                                                                                 | `"2020-08-22T00:00:00.000Z"`             |
-| lenderPhoneNumber              | A valid phone number for the lender                                                                                                                         | `"+12223334444"`                         |
-| checkPayableTo                 | To whom the check is payable to                                                                                                                             | `"+12223334444"`                         |
-| standardMailingAddress         | Contains a standard mailing address for the lender                                                                                                          |
-| overnightMailingAddress        | Contains an overnight mailing address for the lender                                                                                                        |
-| accountNumber                  | Contains the account number for the account as provided by the lender                                                                                       |
-| eftAccountNumber               | An account number for EFT                                                                                                                                   |
-| eftRoutingNumber               | A routing number for EFT                                                                                                                                    |
-| eftState                       | The state, as it relates to EFT                                                                                                                             | `"TX"`                                   |
-| eftCity                        | The city, as it relates to EFT                                                                                                                              | `"DALLAS"`                               |
-| eftZipCode                     | The ZIP code, as it relates to EFT                                                                                                                          | `"75204"`                                |
-| success                        | A boolean, stating whether we were able to retrieve the payoff or not                                                                                       | `true`                                 |
-| errorMessage                   | If success is false, we will attempt to provide an error message                                                                                            |
-| fulfilledBy                    | Can be `"integration"` or `"fulfillment center"`, depending on how the payoff was fulfilled                                                                 | `"integration"`                          |
-| customerAuthorizationAttempted | Can be `true` or `false`, depending on whether verbal customer authorization was utilized to retrieve the payoff. Disabled at the company level by default. | `false`                                |
-| status                         | The current status for an order when receiving an Customer Authorization attempt webhook (attempts must be enabled)                                         | `"pending"`                              |
-| attempt                        | Will return `true` if the webhook received is a Customer Authorization attempt (attempts must be enabled)                                                   
-| trackingNumber                 | The tracking number for a mailed Title Status request                                                                                                       | `"340-7-52607790A-PKG1OF1"`
-| titleSent                      | Can be `true` or `false` depending on whether Title Status has been mailed                                                                                  | `true`
-| dateSent                       | The date sent for a mailed Title Status request                                                                                                             | `"2022-05-19"`
-| titleDeliveryScheduled         | The schedule delivery date for a mailed Title Status request                                                                                                | `"2022-05-21"`
-| titleAddress                   | An object consisting of `streetAddress`, `city`, `state`, `zipCode` for a Title Status request                                                              |
-| paymentReceived                | Can be `true` or `false` depending on whether payment is received on a Payment Status request                                                               | `true`
-| dateReceived                   | The date received on a Payment Status request                                                                                                               | `"2022-05-12"`
-| dateDeposited                  | The date deposited on a Payment Status request                                                                                                              | `"2022-05-12"`
-| paymentDeposited               | Can be `true` or `false` depending on whether the payment was deposited on a Payment Status Request`                                                        | `true`
-| paymentMailingAddress          | An object consisting of `streetAddress`, `city`, `state`, `zipCode` for a Payment Status request                                                            |
-| documentUrl                    | The URL that can be used as a `GET` request to retrieve your requested digital document                                                                     | `"https://{YOUR_BASE_URL}/documents/f02e4050-6596-46ed-bf1e-0456403964a"`
-| maxAttempts                    | A boolean set to `true` if no more attempts are available on the order to be fulfilled                                                                      |`true`
+| Key                            | Description                                                                                                                                                         | Example                                |
+|--------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------|
+| packetId                       | The LossExpress UUID (A `packet` is a grouping of orders)                                                                                                           | `"f94bbd89-e9e0-45ac-a02b-e4d4afad6a8f"` |
+| payoffId                       | The LossExpress UUID (Same as above - will be deprecated in future)                                                                                                 | `"f94bbd89-e9e0-45ac-a02b-e4d4afad6a8f"` |
+| orderId                        | The LossExpress UUID for the specific order                                                                                                                         | `"61951010-d4a0-48b3-86b6-3908da2b0800"` |
+| orderType                      | The type of order that has been requested                                                                                                                           | `"Payoff Request"`                       |
+| ownerName                      | The vehicle owner's name                                                                                                                                            | `"Payoff Request"`                       |
+| coOwnerName                    | The vehicle co-owner's name                                                                                                                                         | `"Payoff Request"`                       |
+| titledState                    | The Titled State of the vehicle                                                                                                                                     | `"Payoff Request"`                       |
+| payoffAmount                   | A number containing the amount remaining on the loan                                                                                                                | `10222.33`                             |
+| perDiem                        | The per diem for the particular loan                                                                                                                                | `2.33`                                 |
+| validThroughDate               | A JSON timestamp for the valid through date                                                                                                                         | `"2020-08-22T00:00:00.000Z"`             |
+| lenderPhoneNumber              | A valid phone number for the lender                                                                                                                                 | `"+12223334444"`                         |
+| checkPayableTo                 | To whom the check is payable to                                                                                                                                     | `"+12223334444"`                         |
+| standardMailingAddress         | Object containing a standard mailing address for the lender, can contain the following keys: `company, attn, streetAddress, streetAddress2, city, state, zipCode`   |
+| overnightMailingAddress        | Object containing an overnight mailing address for the lender, can contain the following keys: `company, attn, streetAddress, streetAddress2, city, state, zipCode` |
+| accountNumber                  | Contains the account number for the account as provided by the lender                                                                                               |
+| eftAccountNumber               | An account number for EFT                                                                                                                                           |
+| eftRoutingNumber               | A routing number for EFT                                                                                                                                            |
+| eftState                       | The state, as it relates to EFT                                                                                                                                     | `"TX"`                                   |
+| eftCity                        | The city, as it relates to EFT                                                                                                                                      | `"DALLAS"`                               |
+| eftZipCode                     | The ZIP code, as it relates to EFT                                                                                                                                  | `"75204"`                                |
+| success                        | A boolean, stating whether we were able to retrieve the payoff or not                                                                                               | `true`                                 |
+| errorMessage                   | If success is false, we will attempt to provide an error message                                                                                                    |
+| fulfilledBy                    | Can be `"integration"` or `"fulfillment center"`, depending on how the payoff was fulfilled                                                                         | `"integration"`                          |
+| customerAuthorizationAttempted | Can be `true` or `false`, depending on whether verbal customer authorization was utilized to retrieve the payoff. Disabled at the company level by default.         | `false`                                |
+| status                         | The current status for an order when receiving an Customer Authorization attempt webhook (attempts must be enabled)                                                 | `"pending"`                              |
+| attempt                        | Will return `true` if the webhook received is a Customer Authorization attempt (attempts must be enabled)                                                           
+| trackingNumber                 | The tracking number for a mailed Title Status request                                                                                                               | `"340-7-52607790A-PKG1OF1"`
+| titleSent                      | Can be `true` or `false` depending on whether Title Status has been mailed                                                                                          | `true`
+| dateSent                       | The date sent for a mailed Title Status request                                                                                                                     | `"2022-05-19"`
+| titleDeliveryScheduled         | The schedule delivery date for a mailed Title Status request                                                                                                        | `"2022-05-21"`
+| titleAddress                   | An object consisting of `streetAddress`, `city`, `state`, `zipCode` for a Title Status request                                                                      |
+| paymentReceived                | Can be `true` or `false` depending on whether payment is received on a Payment Status request                                                                       | `true`
+| dateReceived                   | The date received on a Payment Status request                                                                                                                       | `"2022-05-12"`
+| dateDeposited                  | The date deposited on a Payment Status request                                                                                                                      | `"2022-05-12"`
+| paymentDeposited               | Can be `true` or `false` depending on whether the payment was deposited on a Payment Status Request`                                                                | `true`
+| paymentMailingAddress          | An object consisting of `streetAddress`, `city`, `state`, `zipCode` for a Payment Status request                                                                    |
+| documentUrl                    | The URL that can be used as a `GET` request to retrieve your requested digital document                                                                             | `"https://{YOUR_BASE_URL}/documents/f02e4050-6596-46ed-bf1e-0456403964a"`
+| maxAttempts                    | A boolean set to `true` if no more attempts are available on the order to be fulfilled                                                                              |`true`
 
 
 <aside class="notice">
