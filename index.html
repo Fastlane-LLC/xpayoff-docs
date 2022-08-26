@@ -375,6 +375,13 @@
         <h1 id='introduction'>Introduction</h1>
 <p>Welcome to the LossExpress xPayoff API! You can utilize this API to get pertinent information regarding a consumer&#39;s vehicle loan.</p>
 <h1 id='updates'>Updates</h1>
+<p><strong>2022-08-24</strong></p>
+
+<ul>
+<li>New <code>company</code> key added to standard and overnight addresses in <a href="#webhook-body">Webhook Body</a></li>
+<li>New <code>ownerName</code>, <code>coOwnerName</code>, and <code>titledState</code> keys added in <a href="#webhook-body">Webhook Body</a></li>
+</ul>
+
 <p><strong>2022-08-16</strong></p>
 
 <ul>
@@ -488,15 +495,29 @@ See <a href="#loan-payoff-request">Loan Payoff Request</a>, <a href="#create-ord
   </span><span class="nl">"payoffId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f94bbd89-e9e0-45ac-a02b-e4d4afad6a8f"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"61951010-d4a0-48b3-86b6-3908da2b0800"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Payoff Request"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"accountNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"ownerName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jane Doe"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"coOwnerName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Doe"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"titledState"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CO"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"payoffAmount"</span><span class="p">:</span><span class="w"> </span><span class="mf">10222.33</span><span class="p">,</span><span class="w">
   </span><span class="nl">"perDiem"</span><span class="p">:</span><span class="w"> </span><span class="mf">2.33</span><span class="p">,</span><span class="w">
   </span><span class="nl">"validThroughDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-08-22T00:00:00.000Z"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"lenderPhoneNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+12223334444"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"checkPayableTo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jane Doe"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"standardMailingAddress"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"company"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Standard Lender"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"attn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Doe"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"streetAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1000 Main Street"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"streetAddress2"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Suite 900"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dallas"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TX"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"zipCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"75204"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"overnightMailingAddress"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"company"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Overnight Lender"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"attn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jeremy Doe"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"streetAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2000 Main Street"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"streetAddress2"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Suite 450"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dallas"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TX"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"zipCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"75204"</span><span class="w">
@@ -594,6 +615,21 @@ See <a href="#loan-payoff-request">Loan Payoff Request</a>, <a href="#create-ord
 <td><code>&quot;Payoff Request&quot;</code></td>
 </tr>
 <tr>
+<td>ownerName</td>
+<td>The vehicle owner&#39;s name</td>
+<td><code>&quot;Payoff Request&quot;</code></td>
+</tr>
+<tr>
+<td>coOwnerName</td>
+<td>The vehicle co-owner&#39;s name</td>
+<td><code>&quot;Payoff Request&quot;</code></td>
+</tr>
+<tr>
+<td>titledState</td>
+<td>The Titled State of the vehicle</td>
+<td><code>&quot;Payoff Request&quot;</code></td>
+</tr>
+<tr>
 <td>payoffAmount</td>
 <td>A number containing the amount remaining on the loan</td>
 <td><code>10222.33</code></td>
@@ -620,12 +656,12 @@ See <a href="#loan-payoff-request">Loan Payoff Request</a>, <a href="#create-ord
 </tr>
 <tr>
 <td>standardMailingAddress</td>
-<td>Contains a standard mailing address for the lender</td>
+<td>Object containing a standard mailing address for the lender, can contain the following keys: <code>company, attn, streetAddress, streetAddress2, city, state, zipCode</code></td>
 <td></td>
 </tr>
 <tr>
 <td>overnightMailingAddress</td>
-<td>Contains an overnight mailing address for the lender</td>
+<td>Object containing an overnight mailing address for the lender, can contain the following keys: <code>company, attn, streetAddress, streetAddress2, city, state, zipCode</code></td>
 <td></td>
 </tr>
 <tr>
