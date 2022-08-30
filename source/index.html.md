@@ -261,6 +261,7 @@ Below are the current list of messages that could be returned when we run into a
 - Social Security number required
 - Social Security number required (last 4)
 - Unable to find account
+- Unable to verify lender
 - Wait time too long
 - Wrong email
 - Wrong fax
