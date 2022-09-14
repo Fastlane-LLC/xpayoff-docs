@@ -194,6 +194,19 @@ Where STRINGIFIED_REQUEST is the JSON of the request body (with no padding/white
 }
 ```
 
+> Example "Attempt" Webhook Body:
+
+```json
+{
+  "packetId": "38d3fb91-302d-4fd8-89d4-a9a6c63b41f4",
+  "orderType": "Payoff Request",
+  "orderId": "ddc7b596-d6f7-4c82-9bd5-90e9aeefe72e",
+  "attempt": true,
+  "status": "pending",
+  "errorMessage": "Integration failed",
+  "customerAuthorizationAttempted": false
+}
+```
 
 The body of the request sent to the webhook will be a JSON object with the following possible keys:
 
@@ -261,6 +274,7 @@ Below are the current list of messages that could be returned when we run into a
 - Social Security number required
 - Social Security number required (last 4)
 - Unable to find account
+- Unable to verify lender
 - Wait time too long
 - Wrong email
 - Wrong fax
