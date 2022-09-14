@@ -585,6 +585,19 @@ See <a href="#loan-payoff-request">Loan Payoff Request</a>, <a href="#create-ord
   </span><span class="nl">"customerAuthorizationAttempted"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
+<blockquote>
+<p>Example &quot;Attempt&quot; Webhook Body:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"packetId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"38d3fb91-302d-4fd8-89d4-a9a6c63b41f4"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Payoff Request"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ddc7b596-d6f7-4c82-9bd5-90e9aeefe72e"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"attempt"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"errorMessage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Integration failed"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"customerAuthorizationAttempted"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
 <p>The body of the request sent to the webhook will be a JSON object with the following possible keys:</p>
 
 <table><thead>
@@ -807,6 +820,7 @@ See <a href="#loan-payoff-request">Loan Payoff Request</a>, <a href="#create-ord
 <li>Social Security number required</li>
 <li>Social Security number required (last 4)</li>
 <li>Unable to find account</li>
+<li>Unable to verify lender</li>
 <li>Wait time too long</li>
 <li>Wrong email</li>
 <li>Wrong fax</li>
