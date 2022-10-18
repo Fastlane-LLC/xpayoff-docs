@@ -182,7 +182,7 @@ Where STRINGIFIED_REQUEST is the JSON of the request body (with no padding/white
   "dateSent": "2022-05-11",
   "titleDeliveryScheduled": "2022-05-12",
   "deliveryType": "UPS",
-  "titleAddress": {
+  "titleMailingAddress": {
     "streetAddress": "P.O. Box 660443",
     "city": "Dallas",
     "zipCode": "75265",
