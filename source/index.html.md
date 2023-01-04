@@ -19,6 +19,7 @@ Welcome to the LossExpress xPayoff API! You can utilize this API to get pertinen
 # Updates
 
 **2023-01-04**
+
 - New `Account is delinquent` fulfillment center error message added in [Webhook Body](#webhook-body)
 
 **2022-08-24**
