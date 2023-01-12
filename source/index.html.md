@@ -18,6 +18,10 @@ Welcome to the LossExpress xPayoff API! You can utilize this API to get pertinen
 
 # Updates
 
+**2023-01-04**
+
+- New `Account is delinquent` fulfillment center error message added in [Webhook Body](#webhook-body)
+
 **2022-08-24**
 
 - New `company` key added to standard and overnight addresses in [Webhook Body](#webhook-body)
@@ -263,6 +267,7 @@ Below are the current list of messages that could be returned when we run into a
 - Account is in title perfection
 - Account number required
 - Account is a lease
+- Account is delinquent
 - Call dropped
 - Customer authorization required
 - Customer would not authorize
