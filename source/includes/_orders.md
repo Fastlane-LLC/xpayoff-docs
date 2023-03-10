@@ -146,3 +146,74 @@ This route allows cancellation of an entire request, which will subsequently can
 Parameter | Description
 --------- | -----------
 packetId | The LossExpress UUID associated with the packet to be cancelled
+
+
+## Cancel Order Request
+
+> Cancel Order Request Example Response Body:
+
+```json
+{
+  "success": true,
+  "orders": [
+    {
+      "orderId": "d7dfb949-073b-4424-8c7e-195f6f08352c",
+      "orderType": "Bill of Sale",
+      "status": "cancelled"
+    }
+  ]
+}
+```
+
+This route allows cancellation of a particular order in event that it is no longer needed.
+
+### HTTP Request
+
+`DELETE https://{YOUR_BASE_URL}/orders/cancel-order/{orderId}`
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+orderId | The LossExpress UUID associated with the order to be cancelled
+
+## Add Order to Packet
+
+> Add Order to Packet Request Example Response Body:
+
+```json
+{
+  "packetId": "c30ae9da-9222-4de5-81fe-fe1ac590fa0f",
+  "orders": [
+    {
+      "type": "Payoff Request",
+      "orderId": "3e8c38f3-f4ef-4414-88da-1793d25ef6f0",
+    },
+    {
+      "orderId": "77462941-7b6c-4bd0-9749-588c32654864",
+      "type": "Bill of Sale"
+    }
+  ],
+  "success": true
+}
+```
+
+This route allows a user to add an order to an existing packet. This will only add an order if an existing order of the same type is not currently pending.
+
+The VIN must match the vin of the initial packet request.
+This will throw `success: false` if no orders are added due to the above.
+
+### HTTP Request
+
+`POST https://{YOUR_BASE_URL}/orders/add-orders/{packetId}`
+
+### URL Parameters
+
+URL Parameter | Description
+--------- | -----------
+packetId | The LossExpress UUID associated with the packet 
+
+Body Parameters | Description
+--------- | -----------
+vin | Vehicle Identification Number                                                                                                                                                               | Y | N
+types | An array of the types of orders for the request      
