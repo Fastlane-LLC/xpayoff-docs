@@ -200,7 +200,7 @@ orderId | The LossExpress UUID associated with the order to be cancelled
 
 This route allows a user to add an order to an existing packet. This will only add an order if an existing order of the same type is not currently pending.
 
-The VIN must match the vin of the initial packet request.
+The VIN must match the VIN of the initial packet request.
 This will throw `success: false` if no orders are added due to the above.
 
 ### HTTP Request
