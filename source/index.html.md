@@ -18,10 +18,6 @@ Welcome to the LossExpress xPayoff API! You can utilize this API to get pertinen
 
 # Updates
 
-**2023-03-10**
-
-- New `Add Order to Packet` route added in [Orders](#add-order-to-packet)
-
 **2023-01-04**
 
 - New `Account is delinquent` fulfillment center error message added in [Webhook Body](#webhook-body)
