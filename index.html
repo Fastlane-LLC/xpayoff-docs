@@ -354,6 +354,12 @@
                   <li>
                     <a href="#cancel-packet-request" class="toc-h2 toc-link" data-title="Cancel Packet Request">Cancel Packet Request</a>
                   </li>
+                  <li>
+                    <a href="#cancel-order-request-2" class="toc-h2 toc-link" data-title="Cancel Order Request">Cancel Order Request</a>
+                  </li>
+                  <li>
+                    <a href="#add-order-to-packet" class="toc-h2 toc-link" data-title="Add Order to Packet">Add Order to Packet</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -375,6 +381,18 @@
         <h1 id='introduction'>Introduction</h1>
 <p>Welcome to the LossExpress xPayoff API! You can utilize this API to get pertinent information regarding a consumer&#39;s vehicle loan.</p>
 <h1 id='updates'>Updates</h1>
+<p><strong>2023-03-10</strong></p>
+
+<ul>
+<li>New <code>Add Order to Packet</code> route added in <a href="#add-order-to-packet">Orders</a></li>
+</ul>
+
+<p><strong>2023-01-04</strong></p>
+
+<ul>
+<li>New <code>Account is delinquent</code> fulfillment center error message added in <a href="#webhook-body">Webhook Body</a></li>
+</ul>
+
 <p><strong>2022-08-24</strong></p>
 
 <ul>
@@ -809,6 +827,7 @@ See <a href="#loan-payoff-request">Loan Payoff Request</a>, <a href="#create-ord
 <li>Account is in title perfection</li>
 <li>Account number required</li>
 <li>Account is a lease</li>
+<li>Account is delinquent</li>
 <li>Call dropped</li>
 <li>Customer authorization required</li>
 <li>Customer would not authorize</li>
@@ -1153,6 +1172,89 @@ See <a href="#loan-payoff-request">Loan Payoff Request</a>, <a href="#create-ord
 <tr>
 <td>packetId</td>
 <td>The LossExpress UUID associated with the packet to be cancelled</td>
+</tr>
+</tbody></table>
+<h2 id='cancel-order-request-2'>Cancel Order Request</h2>
+<blockquote>
+<p>Cancel Order Request Example Response Body:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orders"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"d7dfb949-073b-4424-8c7e-195f6f08352c"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bill of Sale"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cancelled"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This route allows cancellation of a particular order in event that it is no longer needed.</p>
+<h3 id='http-request-5'>HTTP Request</h3>
+<p><code>DELETE https://{YOUR_BASE_URL}/orders/cancel-order/{orderId}</code></p>
+<h3 id='url-parameters-3'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>orderId</td>
+<td>The LossExpress UUID associated with the order to be cancelled</td>
+</tr>
+</tbody></table>
+<h2 id='add-order-to-packet'>Add Order to Packet</h2>
+<blockquote>
+<p>Add Order to Packet Request Example Response Body:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"packetId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c30ae9da-9222-4de5-81fe-fe1ac590fa0f"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orders"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Payoff Request"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3e8c38f3-f4ef-4414-88da-1793d25ef6f0"</span><span class="p">,</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"77462941-7b6c-4bd0-9749-588c32654864"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bill of Sale"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This route allows a user to add an order to an existing packet. This will only add an order if an existing order of the same type is not currently pending.</p>
+
+<p>The VIN must match the VIN of the initial packet request.
+This will throw <code>success: false</code> if no orders are added due to the above.</p>
+<h3 id='http-request-6'>HTTP Request</h3>
+<p><code>POST https://{YOUR_BASE_URL}/orders/add-orders/{packetId}</code></p>
+<h3 id='url-parameters-4'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>URL Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>packetId</td>
+<td>The LossExpress UUID associated with the packet</td>
+</tr>
+</tbody></table>
+
+<table><thead>
+<tr>
+<th>Body Parameters</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>vin</td>
+<td>Vehicle Identification Number</td>
+</tr>
+<tr>
+<td>types</td>
+<td>An array of the types of orders for the request</td>
 </tr>
 </tbody></table>
 <h1 id='loan-payoff-request'>Loan Payoff Request</h1><h2 id='create-request'>Create Request</h2>
