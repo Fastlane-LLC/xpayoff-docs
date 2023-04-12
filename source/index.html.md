@@ -277,7 +277,7 @@ Below are the current list of messages that could be returned when we run into a
 - Customer would not authorize
 - Date of birth required
 - Lender would not release to a third party
-- Loan has been paid off
+- Account is closed or paid off
 - Required to be sent via email
 - Required to be sent via fax
 - Social Security number required
