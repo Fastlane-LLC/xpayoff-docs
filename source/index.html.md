@@ -18,6 +18,11 @@ Welcome to the LossExpress xPayoff API! You can utilize this API to get pertinen
 
 # Updates
 
+**2023-05-23**
+
+- New `Mismatch info provided` error message added in [Webhook Body](#webhook-body)
+
+
 **2023-03-10**
 
 - New `Add Order to Packet` route added in [Orders](#add-order-to-packet)
@@ -264,10 +269,11 @@ The body of the request sent to the webhook will be a JSON object with the follo
   Only `payoffId`, `packetId`, and `success` are guaranteed to be in any given webhook body sent.
 </aside>
 
-### Error Messages (Fulfillment Center)
+### Error Messages
 
-Below are the current list of messages that could be returned when we run into an issue gathering a payoff via our fulfillment center:
+Below are the current list of messages that could be returned when we run into an issue gathering a payoff:
 
+- Account is closed or paid off
 - Account is in title perfection
 - Account number required
 - Account is a lease
@@ -277,7 +283,7 @@ Below are the current list of messages that could be returned when we run into a
 - Customer would not authorize
 - Date of birth required
 - Lender would not release to a third party
-- Account is closed or paid off
+- Mismatch info provided
 - Required to be sent via email
 - Required to be sent via fax
 - Social Security number required
