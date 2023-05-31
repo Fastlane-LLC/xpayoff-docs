@@ -381,6 +381,12 @@
         <h1 id='introduction'>Introduction</h1>
 <p>Welcome to the LossExpress xPayoff API! You can utilize this API to get pertinent information regarding a consumer&#39;s vehicle loan.</p>
 <h1 id='updates'>Updates</h1>
+<p><strong>2023-05-23</strong></p>
+
+<ul>
+<li>New <code>Mismatch info provided</code> error message added in <a href="#webhook-body">Webhook Body</a></li>
+</ul>
+
 <p><strong>2023-03-10</strong></p>
 
 <ul>
@@ -820,10 +826,11 @@ See <a href="#loan-payoff-request">Loan Payoff Request</a>, <a href="#create-ord
 <aside class="notice">
   Only `payoffId`, `packetId`, and `success` are guaranteed to be in any given webhook body sent.
 </aside>
-<h3 id='error-messages-fulfillment-center'>Error Messages (Fulfillment Center)</h3>
-<p>Below are the current list of messages that could be returned when we run into an issue gathering a payoff via our fulfillment center:</p>
+<h3 id='error-messages'>Error Messages</h3>
+<p>Below are the current list of messages that could be returned when we run into an issue gathering a payoff:</p>
 
 <ul>
+<li>Account is closed or paid off</li>
 <li>Account is in title perfection</li>
 <li>Account number required</li>
 <li>Account is a lease</li>
@@ -833,7 +840,7 @@ See <a href="#loan-payoff-request">Loan Payoff Request</a>, <a href="#create-ord
 <li>Customer would not authorize</li>
 <li>Date of birth required</li>
 <li>Lender would not release to a third party</li>
-<li>Account is closed or paid off</li>
+<li>Mismatch info provided</li>
 <li>Required to be sent via email</li>
 <li>Required to be sent via fax</li>
 <li>Social Security number required</li>
