@@ -381,6 +381,12 @@
         <h1 id='introduction'>Introduction</h1>
 <p>Welcome to the LossExpress xPayoff API! You can utilize this API to get pertinent information regarding a consumer&#39;s vehicle loan.</p>
 <h1 id='updates'>Updates</h1>
+<p><strong>2023-06-08</strong></p>
+
+<ul>
+<li>Changes <code>eft</code> keys to <code>ach</code> in <a href="#webhook-body">Webhook Body</a></li>
+</ul>
+
 <p><strong>2023-05-23</strong></p>
 
 <ul>
@@ -707,28 +713,28 @@ See <a href="#loan-payoff-request">Loan Payoff Request</a>, <a href="#create-ord
 <td></td>
 </tr>
 <tr>
-<td>eftAccountNumber</td>
-<td>An account number for EFT</td>
+<td>achAccountNumber</td>
+<td>An account number for ACH transfers</td>
 <td></td>
 </tr>
 <tr>
-<td>eftRoutingNumber</td>
-<td>A routing number for EFT</td>
+<td>achRoutingNumber</td>
+<td>A routing number for ACH transfers</td>
 <td></td>
 </tr>
 <tr>
-<td>eftState</td>
-<td>The state, as it relates to EFT</td>
+<td>achState</td>
+<td>The state, as it relates to ACH transfers</td>
 <td><code>&quot;TX&quot;</code></td>
 </tr>
 <tr>
-<td>eftCity</td>
-<td>The city, as it relates to EFT</td>
+<td>achCity</td>
+<td>The city, as it relates to ACH transfers</td>
 <td><code>&quot;DALLAS&quot;</code></td>
 </tr>
 <tr>
-<td>eftZipCode</td>
-<td>The ZIP code, as it relates to EFT</td>
+<td>achZipCode</td>
+<td>The ZIP code, as it relates to ACH transfers</td>
 <td><code>&quot;75204&quot;</code></td>
 </tr>
 <tr>
