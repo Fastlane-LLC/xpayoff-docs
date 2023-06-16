@@ -35,6 +35,15 @@ vin | Vehicle Identification Number                                             
 types | An array of the types of orders for the request                                                                                                                                            | Y | Y 
 payment | An object required for 'Send Payment' order type. Includes `paymentAmount`, `type`, `speed`, `achRoutingNumber`, `achAccountNumber`, `mailingAddress`                                      | Y | N
 
+Payment Object Key | Description                                                                                                                                                                                | Required ACH | Required Check
+-------------- |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------| -----------------------
+paymentAmount |                                                                          | Y            | Y
+type |                     | Y            | Y
+speed |                                                                                                                                                              | N            | N
+achAccountNumber |                                                                                                                                 | Y            | N
+achRoutingNumber |                    | Y            | N
+mailingAddress |               | N            | Y
+
 ## How to test
 - See section [Testing](#testing) where order type is “Send Payment”, this will give you an automated webhook response that replicates what you would receive in production. 
 
