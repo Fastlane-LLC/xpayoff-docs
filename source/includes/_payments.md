@@ -5,6 +5,24 @@
 
 - Add to existing packet: To add a new order type `Send Payment` to an existing `packet` use [Add Order to Packet](#add-order-to-packet), must include the `packetId` you want to associate the new order with in query parameters.
 
+
+> Request example for "check"
+
+```json
+{
+  "add example": "here"
+}
+
+```
+
+> Request example for "ach"
+
+```json
+{
+  "add example": "here"
+}
+
+```
 ### Request Body
 
 This route accepts a JSON payload of an object comprising of:
