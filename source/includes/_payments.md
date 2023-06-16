@@ -6,20 +6,43 @@
 - Add to existing packet: To add a new order type `Send Payment` to an existing `packet` use [Add Order to Packet](#add-order-to-packet), must include the `packetId` you want to associate the new order with in query parameters.
 
 
-> Request example for "check"
+> Request example for "Check" payment:
 
 ```json
 {
-  "add example": "here"
+  "lenderId": "48a970ab-f4fd-49ab-b6b1-7179b8e278f5",
+  "vin": "DXVHZ8CH2A5M03260",
+  "types": ["Send Payment"],
+  "payment": {
+    "paymentAmount": 4533.88,
+    "type": "ACH",
+    "achRoutingNumber": "021200339",
+    "achAccountNumber": "9984344"
+  }
 }
 
 ```
 
-> Request example for "ach"
+> Request example for "ACH" payment:
 
 ```json
 {
-  "add example": "here"
+  "lenderId": "48a970ab-f4fd-49ab-b6b1-7179b8e278f5",
+  "vin": "DXVHZ8CH2A5M03260",
+  "types": ["Send Payment"],
+  "payment": {
+    "paymentAmount": 3448.72,
+    "type": "Check",
+    "mailingAddress": {
+      "attn": "John Doe",
+      "streetAddress": "1000 Main Street",
+      "streetAddress2": "Suite 900",
+      "city": "Dallas",
+      "state": "TX",
+      "zipCode": "75204",
+      "message": "insert message here"
+    } 
+  }
 }
 
 ```
@@ -27,22 +50,22 @@
 
 This route accepts a JSON payload of an object comprising of:
 
-Body Parameter | Description                                                                                                                                                                                | Required? | Fulfillment Center Only
--------------- |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| --------- | -----------------------
-lenderId | The LossExpress Lender UUID. You can receive this UUID by utilizing our lender search functionality                                                                                        | Y | N
-lenderName | A lender name, if a corresponding lender is not in our lender database; this will enter the lender into our queue for validation. Use lenderId whenever possible                           | Y | Y
-vin | Vehicle Identification Number                                                                                                                                                              | Y | N
-types | An array of the types of orders for the request                                                                                                                                            | Y | Y 
-payment | An object required for 'Send Payment' order type. Includes `paymentAmount`, `type`, `speed`, `achRoutingNumber`, `achAccountNumber`, `mailingAddress`                                      | Y | N
+Body Parameter | Description                                                                                                                                                   | Required? | Fulfillment Center Only
+-------------- |---------------------------------------------------------------------------------------------------------------------------------------------------------------| --------- | -----------------------
+lenderId | The LossExpress Lender UUID. You can receive this UUID by utilizing our lender search functionality                                                           | Y | N
+lenderName | A lender name, if a corresponding lender is not in our lender database; this will enter the lender into our queue for validation. Use lenderId whenever possible | Y | Y
+vin | Vehicle Identification Number                                                                                                                                 | Y | N
+types | An array of the types of orders for the request                                                                                                               | Y | Y 
+payment | An object required for 'Send Payment' order type. Includes `paymentAmount`, `type`, `speed`, `achRoutingNumber`, `achAccountNumber`, `mailingAddress`,  | Y | N
 
-Payment Object Key | Description                                                                                                                                                                                | Required ACH | Required Check
--------------- |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------| -----------------------
-paymentAmount |                                                                          | Y            | Y
-type |                     | Y            | Y
-speed |                                                                                                                                                              | N            | N
-achAccountNumber |                                                                                                                                 | Y            | N
-achRoutingNumber |                    | Y            | N
-mailingAddress |               | N            | Y
+Payment Object Key | Description | Required ACH | Required Check
+-------------- |-------------|--------------| -----------------------
+paymentAmount | `number`    | Y            | Y
+type | `string`    | Y            | Y
+speed | `string`    | N            | N
+achAccountNumber | `string`    | Y            | N
+achRoutingNumber | `string`    | Y            | N
+mailingAddress | `object`    | N            | Y
 
 ## How to test
 - See section [Testing](#testing) where order type is “Send Payment”, this will give you an automated webhook response that replicates what you would receive in production. 
