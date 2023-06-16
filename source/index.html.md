@@ -23,10 +23,13 @@ Welcome to the LossExpress xPayoff API! You can utilize this API to get pertinen
 
 - New [Payments](#payments) feature. This includes a new order type added that gives ability to Send Payment via ACH or Check. To access this, your company must have permissions enabled and completed the required setup on the developer portal.
 
+**2023-06-08**
+
+- Changes `eft` keys to `ach` in [Webhook Body](#webhook-body)
+
 **2023-05-23**
 
 - New `Mismatch info provided` error message added in [Webhook Body](#webhook-body)
-
 
 **2023-03-10**
 
@@ -245,11 +248,11 @@ The body of the request sent to the webhook will be a JSON object with the follo
 | standardMailingAddress         | Object containing a standard mailing address for the lender, can contain the following keys: `company, attn, streetAddress, streetAddress2, city, state, zipCode`   |
 | overnightMailingAddress        | Object containing an overnight mailing address for the lender, can contain the following keys: `company, attn, streetAddress, streetAddress2, city, state, zipCode` |
 | accountNumber                  | Contains the account number for the account as provided by the lender                                                                                               |
-| eftAccountNumber               | An account number for EFT                                                                                                                                           |
-| eftRoutingNumber               | A routing number for EFT                                                                                                                                            |
-| eftState                       | The state, as it relates to EFT                                                                                                                                     | `"TX"`                                   |
-| eftCity                        | The city, as it relates to EFT                                                                                                                                      | `"DALLAS"`                               |
-| eftZipCode                     | The ZIP code, as it relates to EFT                                                                                                                                  | `"75204"`                                |
+| achAccountNumber               | An account number for ACH transfers                                                                                                                                 |
+| achRoutingNumber               | A routing number for ACH transfers                                                                                                                                  |
+| achState                       | The state, as it relates to ACH transfers                                                                                                                           | `"TX"`                                   |
+| achCity                        | The city, as it relates to ACH transfers                                                                                                                            | `"DALLAS"`                               |
+| achZipCode                     | The ZIP code, as it relates to ACH transfers                                                                                                                        | `"75204"`                                |
 | success                        | A boolean, stating whether we were able to retrieve the payoff or not                                                                                               | `true`                                 |
 | errorMessage                   | If success is false, we will attempt to provide an error message                                                                                                    |
 | fulfilledBy                    | Can be `"integration"` or `"fulfillment center"`, depending on how the payoff was fulfilled                                                                         | `"integration"`                          |
