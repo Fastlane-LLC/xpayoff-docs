@@ -21,7 +21,7 @@ Welcome to the LossExpress xPayoff API! You can utilize this API to get pertinen
 
 **2023-06-16**
 
-New [Payments](#payments) feature. This includes a new order type added that gives ability to Send Payment via ACH or Check. To access this, your company must have permissions enabled and completed the required setup on the developer portal.
+- New [Payments](#payments) feature. This includes a new order type added that gives ability to Send Payment via ACH or Check. To access this, your company must have permissions enabled and completed the required setup on the developer portal.
 
 **2023-05-23**
 
