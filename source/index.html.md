@@ -67,18 +67,18 @@ Production URL | Development URL                   |
 The following Test VINs can be used on both instances when making either a payoff request or xData order. 
 See [Loan Payoff Request](#loan-payoff-request), [Create Order(s) Request](#create-order-s-request), and [Webhook Body](#webhook-body) for more details.
 
-Test VIN | Outcome                                          | 
-----------|--------------------------------------------|
-`1FTMF1CB6JKE12626` | Automated Payoff Quote 
-`1N4AA5AP8EC474073` | Automated Payoff Quote 
-`5FNYF4H46CB077722` | Automated Payoff Quote 
-`3LNHL2JC5CR800827` | Automated Payoff Quote 
-`ZA9RU31B9XLA12448` | Automated Payoff Quote 
-`1N4AL3AP8JC231503` | Automated Payoff Quote
-`DX4AH51N1K6437778` | Payoff Quote Error Example
-`DX3AA08D68N901917` | 'Title Status' Webhook (xData only)
-`DXHDU4AD4AU955646` | 'Payment Status' Webhook (xData only)
-`DXWRA69M74M033915` | Document Order Webhook ('Lien Release Letter', 'Finance/Lease Agreement', 'Title Image', 'Bill of Sale', 'Repo Affidavit', 'One and the Same Letter', 'Payment History') (xData only)
+Test VIN | Order Type                                                                                                                                      | Description | 
+----------|-------------------------------------------------------------------------------------------------------------------------------------------------|-------------|
+`1FTMF1CB6JKE12626` | Payoff Request                                                                                                                                  | Automated Payoff Quote                                                                               
+`1N4AA5AP8EC474073` | Payoff Request                                                                                                                                  | Automated Payoff Quote                                                                                                                                                                
+`5FNYF4H46CB077722` | Payoff Request                                                                                                                                  | Automated Payoff Quote                                                                                                                                                                
+`3LNHL2JC5CR800827` | Payoff Request                                                                                                                                  | Automated Payoff Quote                                                                                                                                                                
+`ZA9RU31B9XLA12448` | Payoff Request                                                                                                                                  | Automated Payoff Quote                                                                                                                                                                
+`1N4AL3AP8JC231503` | Payoff Request                                                                                                                                  | Automated Payoff Quote                                                                                                                                                                
+`DX4AH51N1K6437778` | Payoff Request                                                                                                                                  | Payoff Quote Error Example                                                                                                                                                            
+`DX3AA08D68N901917` | Title Status                                                                                                                                    | 'Title Status' Webhook (xData only)                                                                                                                                                   
+`DXHDU4AD4AU955646` | Payment Status                                                                                                                                  | 'Payment Status' Webhook (xData only)                                                                                                                                                 
+`DXWRA69M74M033915` | Lien Release Letter, Finance/Lease Agreement, Title Image, Bill of Sale, Repo Affidavit, One and the Same Letter, Payment History | Document Order Webhook (xData only) 
 
 # Authentication
 

@@ -19,3 +19,10 @@ payment | An object required for 'Send Payment' order type. Includes `paymentAmo
 
 ## How to test
 - See section [Testing](#testing) where order type is “Send Payment”, this will give you an automated webhook response that replicates what you would receive in production. 
+
+## How to cancel, limits
+
+- **Cutoff times** to cancel a send payment. After this, the money is in transit so we are unable to retrieve the funds.
+  - ACH, until 16:00 CST day requested
+  - Check, until 23:00 CST day requested
+- Use API routes under [Cancel Order](#cancel-order-request) or [Cancel Packet](#cancel-packet-request)
