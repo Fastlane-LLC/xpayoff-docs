@@ -148,35 +148,6 @@ Parameter | Description
 packetId | The LossExpress UUID associated with the packet to be cancelled
 
 
-## Cancel Order Request
-
-> Cancel Order Request Example Response Body:
-
-```json
-{
-  "success": true,
-  "orders": [
-    {
-      "orderId": "d7dfb949-073b-4424-8c7e-195f6f08352c",
-      "orderType": "Bill of Sale",
-      "status": "cancelled"
-    }
-  ]
-}
-```
-
-This route allows cancellation of a particular order in event that it is no longer needed.
-
-### HTTP Request
-
-`DELETE https://{YOUR_BASE_URL}/orders/cancel-order/{orderId}`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-orderId | The LossExpress UUID associated with the order to be cancelled
-
 ## Add Order to Packet
 
 > Add Order to Packet Request Example Response Body:

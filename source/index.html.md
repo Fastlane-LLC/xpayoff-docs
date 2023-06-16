@@ -4,6 +4,7 @@ title: LossExpress xPayoff API
 includes:
   - lenders
   - orders
+  - payments
   - payoff_request
   - errors
 
@@ -17,6 +18,10 @@ code_clipboard: true
 Welcome to the LossExpress xPayoff API! You can utilize this API to get pertinent information regarding a consumer's vehicle loan.
 
 # Updates
+
+**2023-06-16**
+
+New [Payments](#payments) feature. This includes a new order type added that gives ability to Send Payment via ACH or Check. To access this, your company must have permissions enabled and completed the required setup on the developer portal.
 
 **2023-05-23**
 
