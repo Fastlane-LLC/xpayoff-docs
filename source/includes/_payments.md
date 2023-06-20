@@ -50,22 +50,33 @@
 
 This route accepts a JSON payload of an object comprising of:
 
-Body Parameter | Description                                                                                                                                                   | Required? | Fulfillment Center Only
--------------- |---------------------------------------------------------------------------------------------------------------------------------------------------------------| --------- | -----------------------
-lenderId | The LossExpress Lender UUID. You can receive this UUID by utilizing our lender search functionality                                                           | Y | N
-lenderName | A lender name, if a corresponding lender is not in our lender database; this will enter the lender into our queue for validation. Use lenderId whenever possible | Y | Y
-vin | Vehicle Identification Number                                                                                                                                 | Y | N
-types | An array of the types of orders for the request                                                                                                               | Y | Y 
-payment | An object required for 'Send Payment' order type. Includes `paymentAmount`, `type`, `speed`, `achRoutingNumber`, `achAccountNumber`, `mailingAddress`,  | Y | N
+Body Parameter | Description                                                                                                                                                                  | Required? | Fulfillment Center Only
+-------------- |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| --------- | -----------------------
+lenderId | `string` : The LossExpress Lender UUID. You can receive this UUID by utilizing our lender search functionality                                                               | Y | N
+lenderName | `string` : A lender name, if a corresponding lender is not in our lender database; this will enter the lender into our queue for validation. Use lenderId whenever possible  | Y | Y
+vin | `string` : Vehicle Identification Number                                                                                                                                     | Y | Y
+types | `string[]` : An array of the types of orders for the request                                                                                                                 | Y | Y 
+payment | `object` : An object required for 'Send Payment' order type. Includes `paymentAmount`, `type`, `speed`, `achRoutingNumber`, `achAccountNumber`, `mailingAddress` (see below) | Y | Y
 
-Payment Object Key | Description | Required ACH | Required Check
--------------- |-------------|--------------| -----------------------
-paymentAmount | `number`    | Y            | Y
-type | `string`    | Y            | Y
-speed | `string`    | N            | N
-achAccountNumber | `string`    | Y            | N
-achRoutingNumber | `string`    | Y            | N
-mailingAddress | `object`    | N            | Y
+Payment Object Key | Description                                          | Required ACH | Required Check
+-------------- |------------------------------------------------------|--------------| -----------------------
+paymentAmount | `number` : Amount in USD$                            | Y            | Y
+type | `string` : "ACH" or "Check"                          | Y            | Y
+speed | `string` : "Standard" or "ASAP" (defaults to "ASAP") | N            | N
+achAccountNumber | `string` : Account Number for ACH Transfer           | Y            | N
+achRoutingNumber | `string` : Routing Number for ACH Transfer           | Y            | N
+mailingAddress | `object` :  Mailing Address for Checks (see below)   | N            | Y
+
+Mailing Address Object Key | Description                                | Required
+-------------- |--------------------------------------------|--------------
+attn | `string` : Optional attention line         | N            
+streetAddress | `string`                                   | Y            
+streetAddress2 | `string`                                   | N            
+city | `string`                                   | Y            
+state | `string`                                   | Y           
+zipCode | `string`                                   | Y            
+message | `string` : Optional message to be included | N            
+
 
 ## How to test
 - See section [Testing](#testing) where order type is “Send Payment”, this will give you an automated webhook response that replicates what you would receive in production. 
