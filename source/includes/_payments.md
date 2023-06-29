@@ -12,12 +12,27 @@
 {
   "lenderId": "48a970ab-f4fd-49ab-b6b1-7179b8e278f5",
   "vin": "DXVHZ8CH2A5M03260",
-  "types": ["Send Payment"],
+  "types": [
+    "Send Payment"
+  ],
   "payment": {
     "paymentAmount": 4533.88,
     "type": "ACH",
     "achRoutingNumber": "021200339",
     "achAccountNumber": "9984344"
+  },
+  "titleTransfer": {
+    "businessName": "Fast Cars, Inc.",
+    "requesterName": "John Doe",
+    "requesterPhoneNumber": "214-555-1212",
+    "mailingAddress": {
+      "attn": "John Doe",
+      "streetAddress": "1000 Main Street",
+      "streetAddress2": "Suite 900",
+      "city": "Dallas",
+      "state": "TX",
+      "zipCode": "75204"
+    }
   }
 }
 
@@ -50,13 +65,14 @@
 
 This route accepts a JSON payload of an object comprising of:
 
-Body Parameter | Description                                                                                                                                                                  | Required? | Fulfillment Center Only
--------------- |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| --------- | -----------------------
-lenderId | `string` : The LossExpress Lender UUID. You can receive this UUID by utilizing our lender search functionality                                                               | Y | N
-lenderName | `string` : A lender name, if a corresponding lender is not in our lender database; this will enter the lender into our queue for validation. Use lenderId whenever possible  | Y | Y
-vin | `string` : Vehicle Identification Number                                                                                                                                     | Y | Y
-types | `string[]` : An array of the types of orders for the request                                                                                                                 | Y | Y 
-payment | `object` : An object required for 'Send Payment' order type. Includes `paymentAmount`, `type`, `speed`, `achRoutingNumber`, `achAccountNumber`, `mailingAddress` (see below) | Y | Y
+Body Parameter | Description                                                                                                                                                                                                                                                                                                                                                                       | Required? | Fulfillment Center Only
+-------------- |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| --------- | -----------------------
+lenderId | `string` : The LossExpress Lender UUID. You can receive this UUID by utilizing our lender search functionality                                                                                                                                                                                                                                                                    | Y | N
+lenderName | `string` : A lender name, if a corresponding lender is not in our lender database; this will enter the lender into our queue for validation. Use lenderId whenever possible                                                                                                                                                                                                       | Y | Y
+vin | `string` : Vehicle Identification Number                                                                                                                                                                                                                                                                                                                                          | Y | Y
+types | `string[]` : An array of the types of orders for the request                                                                                                                                                                                                                                                                                                                      | Y | Y 
+payment | `object` : An object required for 'Send Payment' order type. Includes `paymentAmount`, `type`, `speed`, `achRoutingNumber`, `achAccountNumber`, `mailingAddress` (see below)                                                                                                                                                                                                      | Y | Y
+titleTransfer | `object` : An object consisting of `businessName`, `requesterName`, `requesterPhoneNumber`, `mailingAddress` (see below). Title transfer information will to be sent to the lender for who and where to send the title to. We will attempt to send the information you provide to the lender, and it may require you to contact the lender to ensure they can send you the title. | N | N 
 
 Payment Object Key | Description                                          | Required ACH | Required Check
 -------------- |------------------------------------------------------|--------------| -----------------------
@@ -67,15 +83,23 @@ achAccountNumber | `string` : Account Number for ACH Transfer           | Y     
 achRoutingNumber | `string` : Routing Number for ACH Transfer           | Y            | N
 mailingAddress | `object` :  Mailing Address for Checks (see below)   | N            | Y
 
-Mailing Address Object Key | Description                                | Required
--------------- |--------------------------------------------|--------------
-attn | `string` : Optional attention line         | N            
-streetAddress | `string`                                   | Y            
-streetAddress2 | `string`                                   | N            
-city | `string`                                   | Y            
-state | `string`                                   | Y           
-zipCode | `string`                                   | Y            
-message | `string` : Optional message to be included | N            
+Title Transfer Object Key | Description                                                                                                                                                   | Required
+-------------- |---------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------
+businessName | `string` :  If `null` we will auto-populate the company name on your account when sent to lender                                                              | N            
+requesterName | `string` : Contact for the title transfer                                                                                                                     | Y            
+requesterPhoneNumber | `string` : Phone number for the contact                                                                                                                       | Y            
+mailingAddress | `object` :  Shipping address to mail the title to. includes our standard address nested parameters: `attn`, `streetAddress`, `streetAddress2`, `city`, `state`, `zipCode` | Y            
+
+
+Mailing Address Object Key | Description                                              | Required
+-------------- |----------------------------------------------------------|--------------
+attn | `string` : Optional attention line                       | N            
+streetAddress | `string`                                                 | Y            
+streetAddress2 | `string`                                                 | N            
+city | `string`                                                 | Y            
+state | `string`                                                 | Y           
+zipCode | `string`                                                 | Y            
+message | `string` : Optional message to be included (checks only) | N            
 
 
 ## How to test
