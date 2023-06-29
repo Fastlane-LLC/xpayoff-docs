@@ -91,15 +91,15 @@ requesterPhoneNumber | `string` : Phone number for the contact                  
 mailingAddress | `object` :  Shipping address to mail the title to. includes our standard address nested parameters: `attn`, `streetAddress`, `streetAddress2`, `city`, `state`, `zipCode` | Y            
 
 
-Mailing Address Object Key | Description                                              | Required
--------------- |----------------------------------------------------------|--------------
-attn | `string` : Optional attention line                       | N            
-streetAddress | `string`                                                 | Y            
-streetAddress2 | `string`                                                 | N            
-city | `string`                                                 | Y            
-state | `string`                                                 | Y           
-zipCode | `string`                                                 | Y            
-message | `string` : Optional message to be included (checks only) | N            
+Mailing Address Object Key | Description                                                      | Required
+-------------- |------------------------------------------------------------------|--------------
+attn | `string` : Optional attention line                               | N            
+streetAddress | `string`                                                         | Y            
+streetAddress2 | `string`                                                         | N            
+city | `string`                                                         | Y            
+state | `string`                                                         | Y           
+zipCode | `string`                                                         | Y            
+message | `string` : Optional message to be included (payment object only) | N            
 
 
 ## How to test
