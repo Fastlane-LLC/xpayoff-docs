@@ -355,10 +355,24 @@
                     <a href="#cancel-packet-request" class="toc-h2 toc-link" data-title="Cancel Packet Request">Cancel Packet Request</a>
                   </li>
                   <li>
-                    <a href="#cancel-order-request-2" class="toc-h2 toc-link" data-title="Cancel Order Request">Cancel Order Request</a>
+                    <a href="#add-order-to-packet" class="toc-h2 toc-link" data-title="Add Order to Packet">Add Order to Packet</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#payments" class="toc-h1 toc-link" data-title="Payments">Payments</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#how-to-create" class="toc-h2 toc-link" data-title="How to create">How to create</a>
                   </li>
                   <li>
-                    <a href="#add-order-to-packet" class="toc-h2 toc-link" data-title="Add Order to Packet">Add Order to Packet</a>
+                    <a href="#how-to-test" class="toc-h2 toc-link" data-title="How to test">How to test</a>
+                  </li>
+                  <li>
+                    <a href="#how-to-cancel-limits" class="toc-h2 toc-link" data-title="How to cancel, limits">How to cancel, limits</a>
+                  </li>
+                  <li>
+                    <a href="#webhook-responses" class="toc-h2 toc-link" data-title="Webhook responses">Webhook responses</a>
                   </li>
               </ul>
           </li>
@@ -381,6 +395,12 @@
         <h1 id='introduction'>Introduction</h1>
 <p>Welcome to the LossExpress xPayoff API! You can utilize this API to get pertinent information regarding a consumer&#39;s vehicle loan.</p>
 <h1 id='updates'>Updates</h1>
+<p><strong>2023-06-16</strong></p>
+
+<ul>
+<li>New <a href="#payments">Payments</a> feature. This includes a new order type added that gives ability to Send Payment via ACH or Check. To access this, your company must have permissions enabled and completed the required setup on the developer portal.</li>
+</ul>
+
 <p><strong>2023-06-08</strong></p>
 
 <ul>
@@ -446,54 +466,90 @@
 </tr>
 </tbody></table>
 
-<p>The following Test VINs can be used on both instances when making either a payoff request or xData order. 
-See <a href="#loan-payoff-request">Loan Payoff Request</a>, <a href="#create-order-s-request">Create Order(s) Request</a>, and <a href="#webhook-body">Webhook Body</a> for more details.</p>
+<p>The following Test VINs can be used on both instances when making either a payoff request, payment, or xData order. 
+See <a href="#loan-payoff-request">Loan Payoff Request</a>, <a href="#create-order-s-request">Create Order(s) Request</a>, <a href="#payments">Payments</a>, and <a href="#webhook-body">Webhook Body</a> for more details.</p>
 
 <table><thead>
 <tr>
 <th>Test VIN</th>
-<th>Outcome</th>
+<th>Order Type</th>
+<th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td><code>1FTMF1CB6JKE12626</code></td>
-<td>Automated Payoff Quote</td>
+<td>Payoff Request</td>
+<td>Successful Payoff Quote Webhook</td>
 </tr>
 <tr>
 <td><code>1N4AA5AP8EC474073</code></td>
-<td>Automated Payoff Quote</td>
+<td>Payoff Request</td>
+<td>Successful Payoff Quote Webhook</td>
 </tr>
 <tr>
 <td><code>5FNYF4H46CB077722</code></td>
-<td>Automated Payoff Quote</td>
+<td>Payoff Request</td>
+<td>Successful Payoff Quote Webhook</td>
 </tr>
 <tr>
 <td><code>3LNHL2JC5CR800827</code></td>
-<td>Automated Payoff Quote</td>
+<td>Payoff Request</td>
+<td>Successful Payoff Quote Webhook</td>
 </tr>
 <tr>
 <td><code>ZA9RU31B9XLA12448</code></td>
-<td>Automated Payoff Quote</td>
+<td>Payoff Request</td>
+<td>Successful Payoff Quote Webhook</td>
 </tr>
 <tr>
 <td><code>1N4AL3AP8JC231503</code></td>
-<td>Automated Payoff Quote</td>
+<td>Payoff Request</td>
+<td>Successful Payoff Quote Webhook</td>
 </tr>
 <tr>
 <td><code>DX4AH51N1K6437778</code></td>
-<td>Payoff Quote Error Example</td>
+<td>Payoff Request</td>
+<td>Error Payoff Quote Webhook</td>
 </tr>
 <tr>
 <td><code>DX3AA08D68N901917</code></td>
-<td>&#39;Title Status&#39; Webhook (xData only)</td>
+<td>Title Status</td>
+<td>Successful &#39;Title Status&#39; Webhook (xData only)</td>
 </tr>
 <tr>
 <td><code>DXHDU4AD4AU955646</code></td>
-<td>&#39;Payment Status&#39; Webhook (xData only)</td>
+<td>Payment Status</td>
+<td>Successful &#39;Payment Status&#39; Webhook (xData only)</td>
 </tr>
 <tr>
 <td><code>DXWRA69M74M033915</code></td>
-<td>Document Order Webhook (&#39;Lien Release Letter&#39;, &#39;Finance/Lease Agreement&#39;, &#39;Title Image&#39;, &#39;Bill of Sale&#39;, &#39;Repo Affidavit&#39;, &#39;One and the Same Letter&#39;, &#39;Payment History&#39;) (xData only)</td>
+<td>Lien Release Letter, Finance/Lease Agreement, Title Image, Bill of Sale, Repo Affidavit, One and the Same Letter, Payment History</td>
+<td>Successful Document Order Webhook (xData only)</td>
+</tr>
+<tr>
+<td><code>DXALP6539TK196548</code></td>
+<td>Send Payment (via ACH)</td>
+<td>Successful Payment Webhook (ACH)</td>
+</tr>
+<tr>
+<td><code>DXASP11J6TW112004</code></td>
+<td>Send Payment (via ACH)</td>
+<td>Returned Payment Webhook (ACH)</td>
+</tr>
+<tr>
+<td><code>DX3ES56C55D137449</code></td>
+<td>Send Payment (via Check)</td>
+<td>Successful Payment Webhook (Check)</td>
+</tr>
+<tr>
+<td><code>DXVBP8AM0D5265429</code></td>
+<td>Send Payment (via Check)</td>
+<td>Failure/Error Payment Webhook (Check)</td>
+</tr>
+<tr>
+<td><code>DXVHZ8CH2A5M03260</code></td>
+<td>Send Payment</td>
+<td>Cancelled Payment Webhook (ACH or Check)</td>
 </tr>
 </tbody></table>
 <h1 id='authentication'>Authentication</h1>
@@ -1187,36 +1243,6 @@ See <a href="#loan-payoff-request">Loan Payoff Request</a>, <a href="#create-ord
 <td>The LossExpress UUID associated with the packet to be cancelled</td>
 </tr>
 </tbody></table>
-<h2 id='cancel-order-request-2'>Cancel Order Request</h2>
-<blockquote>
-<p>Cancel Order Request Example Response Body:</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"orders"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"d7dfb949-073b-4424-8c7e-195f6f08352c"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bill of Sale"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cancelled"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<p>This route allows cancellation of a particular order in event that it is no longer needed.</p>
-<h3 id='http-request-5'>HTTP Request</h3>
-<p><code>DELETE https://{YOUR_BASE_URL}/orders/cancel-order/{orderId}</code></p>
-<h3 id='url-parameters-3'>URL Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>orderId</td>
-<td>The LossExpress UUID associated with the order to be cancelled</td>
-</tr>
-</tbody></table>
 <h2 id='add-order-to-packet'>Add Order to Packet</h2>
 <blockquote>
 <p>Add Order to Packet Request Example Response Body:</p>
@@ -1240,9 +1266,9 @@ See <a href="#loan-payoff-request">Loan Payoff Request</a>, <a href="#create-ord
 
 <p>The VIN must match the VIN of the initial packet request.
 This will throw <code>success: false</code> if no orders are added due to the above.</p>
-<h3 id='http-request-6'>HTTP Request</h3>
+<h3 id='http-request-5'>HTTP Request</h3>
 <p><code>POST https://{YOUR_BASE_URL}/orders/add-orders/{packetId}</code></p>
-<h3 id='url-parameters-4'>URL Parameters</h3>
+<h3 id='url-parameters-3'>URL Parameters</h3>
 <table><thead>
 <tr>
 <th>URL Parameter</th>
@@ -1270,7 +1296,318 @@ This will throw <code>success: false</code> if no orders are added due to the ab
 <td>An array of the types of orders for the request</td>
 </tr>
 </tbody></table>
-<h1 id='loan-payoff-request'>Loan Payoff Request</h1><h2 id='create-request'>Create Request</h2>
+<h1 id='payments'>Payments</h1><h2 id='how-to-create'>How to create</h2>
+<ul>
+<li><p>Individual request: To create new order type <code>Send Payment</code> by itself use <a href="#create-order-s-request">Create Order(s) Request</a></p></li>
+<li><p>Add to existing packet: To add a new order type <code>Send Payment</code> to an existing <code>packet</code> use <a href="#add-order-to-packet">Add Order to Packet</a>, must include the <code>packetId</code> you want to associate the new order with in query parameters.</p></li>
+</ul>
+
+<blockquote>
+<p>Request example for &quot;Check&quot; payment:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"lenderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"48a970ab-f4fd-49ab-b6b1-7179b8e278f5"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"vin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DXVHZ8CH2A5M03260"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"types"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"Send Payment"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"paymentAmount"</span><span class="p">:</span><span class="w"> </span><span class="mf">4533.88</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACH"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"achRoutingNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"021200339"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"achAccountNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9984344"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"titleTransfer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"businessName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fast Cars, Inc."</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"requesterName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Doe"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"requesterPhoneNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"214-555-1212"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"mailingAddress"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"attn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Doe"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"streetAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1000 Main Street"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"streetAddress2"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Suite 900"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dallas"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TX"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"zipCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"75204"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div>
+<blockquote>
+<p>Request example for &quot;ACH&quot; payment:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"lenderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"48a970ab-f4fd-49ab-b6b1-7179b8e278f5"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"vin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DXVHZ8CH2A5M03260"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"types"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Send Payment"</span><span class="p">],</span><span class="w">
+  </span><span class="nl">"payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"paymentAmount"</span><span class="p">:</span><span class="w"> </span><span class="mf">3448.72</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Check"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"mailingAddress"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"attn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Doe"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"streetAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1000 Main Street"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"streetAddress2"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Suite 900"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dallas"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TX"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"zipCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"75204"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"insert message here"</span><span class="w">
+    </span><span class="p">}</span><span class="w"> 
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div><h3 id='request-body'>Request Body</h3>
+<p>This route accepts a JSON payload of an object comprising of:</p>
+
+<table><thead>
+<tr>
+<th>Body Parameter</th>
+<th>Description</th>
+<th>Required?</th>
+<th>Fulfillment Center Only</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>lenderId</td>
+<td><code>string</code> : The LossExpress Lender UUID. You can receive this UUID by utilizing our lender search functionality</td>
+<td>Y</td>
+<td>N</td>
+</tr>
+<tr>
+<td>lenderName</td>
+<td><code>string</code> : A lender name, if a corresponding lender is not in our lender database; this will enter the lender into our queue for validation. Use lenderId whenever possible</td>
+<td>Y</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>vin</td>
+<td><code>string</code> : Vehicle Identification Number</td>
+<td>Y</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>types</td>
+<td><code>string[]</code> : An array of the types of orders for the request</td>
+<td>Y</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>payment</td>
+<td><code>object</code> : An object required for &#39;Send Payment&#39; order type. Includes <code>paymentAmount</code>, <code>type</code>, <code>speed</code>, <code>achRoutingNumber</code>, <code>achAccountNumber</code>, <code>mailingAddress</code> (see below)</td>
+<td>Y</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>titleTransfer</td>
+<td><code>object</code> : An object consisting of <code>businessName</code>, <code>requesterName</code>, <code>requesterPhoneNumber</code>, <code>mailingAddress</code> (see below). Title transfer information will to be sent to the lender for who and where to send the title to. We will attempt to send the information you provide to the lender, and it may require you to contact the lender to ensure they can send you the title.</td>
+<td>N</td>
+<td>N</td>
+</tr>
+</tbody></table>
+
+<table><thead>
+<tr>
+<th>Payment Object Key</th>
+<th>Description</th>
+<th>Required ACH</th>
+<th>Required Check</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>paymentAmount</td>
+<td><code>number</code> : Amount in USD$</td>
+<td>Y</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>type</td>
+<td><code>string</code> : &quot;ACH&quot; or &quot;Check&quot;</td>
+<td>Y</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>speed</td>
+<td><code>string</code> : &quot;Standard&quot; or &quot;ASAP&quot; (defaults to &quot;ASAP&quot;)</td>
+<td>N</td>
+<td>N</td>
+</tr>
+<tr>
+<td>achAccountNumber</td>
+<td><code>string</code> : Account Number for ACH Transfer</td>
+<td>Y</td>
+<td>N</td>
+</tr>
+<tr>
+<td>achRoutingNumber</td>
+<td><code>string</code> : Routing Number for ACH Transfer</td>
+<td>Y</td>
+<td>N</td>
+</tr>
+<tr>
+<td>mailingAddress</td>
+<td><code>object</code> :  Mailing Address for Checks (see below)</td>
+<td>N</td>
+<td>Y</td>
+</tr>
+</tbody></table>
+
+<table><thead>
+<tr>
+<th>Title Transfer Object Key</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>businessName</td>
+<td><code>string</code> :  If <code>null</code> we will auto-populate the company name on your account when sent to lender</td>
+<td>N</td>
+</tr>
+<tr>
+<td>requesterName</td>
+<td><code>string</code> : Contact for the title transfer</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>requesterPhoneNumber</td>
+<td><code>string</code> : Phone number for the contact</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>mailingAddress</td>
+<td><code>object</code> :  Shipping address to mail the title to. includes our standard address nested parameters: <code>attn</code>, <code>streetAddress</code>, <code>streetAddress2</code>, <code>city</code>, <code>state</code>, <code>zipCode</code></td>
+<td>Y</td>
+</tr>
+</tbody></table>
+
+<table><thead>
+<tr>
+<th>Mailing Address Object Key</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>attn</td>
+<td><code>string</code> : Optional attention line</td>
+<td>N</td>
+</tr>
+<tr>
+<td>streetAddress</td>
+<td><code>string</code></td>
+<td>Y</td>
+</tr>
+<tr>
+<td>streetAddress2</td>
+<td><code>string</code></td>
+<td>N</td>
+</tr>
+<tr>
+<td>city</td>
+<td><code>string</code></td>
+<td>Y</td>
+</tr>
+<tr>
+<td>state</td>
+<td><code>string</code></td>
+<td>Y</td>
+</tr>
+<tr>
+<td>zipCode</td>
+<td><code>string</code></td>
+<td>Y</td>
+</tr>
+<tr>
+<td>message</td>
+<td><code>string</code> : Optional message to be included (payment object only)</td>
+<td>N</td>
+</tr>
+</tbody></table>
+<h2 id='how-to-test'>How to test</h2>
+<ul>
+<li>See section <a href="#testing">Testing</a> where order type is “Send Payment”, this will give you an automated webhook response that replicates what you would receive in production. </li>
+</ul>
+<h2 id='how-to-cancel-limits'>How to cancel, limits</h2>
+<ul>
+<li><strong>Cutoff times</strong> to cancel a send payment. After this, the money is in transit so we are unable to retrieve the funds.
+
+<ul>
+<li>ACH, until 16:00 CST day requested</li>
+<li>Check, until 23:00 CST day requested</li>
+</ul></li>
+<li>Use API routes under <a href="#cancel-order-request">Cancel Order</a> or <a href="#cancel-packet-request">Cancel Packet</a></li>
+</ul>
+<h2 id='webhook-responses'>Webhook responses</h2>
+<ul>
+<li>Initial creation response is exact same as current <a href="#create-order-s-request">Create Order Request</a>.</li>
+</ul>
+
+<blockquote>
+<p>Example webhook response for cancellation:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"packetId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0d7a7a8b-416a-451f-8ce6-8d63aaa88c50"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6bf2e359-6a49-4a76-a0f1-426629f15e61"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Send Payment"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cancelled"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"errorMessage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Order cancelled"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-06-07T16:55:45.818Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div>
+<blockquote>
+<p>Example webhook response for success:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"packetId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"17ad5f32-4429-4bd2-b042-086ad39d2024"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9aab793b-c6ac-441c-8754-25cfa408bd77"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Send Payment"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fulfilled"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-06-14T16:05:12.141Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div>
+<blockquote>
+<p>Example response for ach “returned” order:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"packetId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"46cbe3dc-3b20-4691-b0c1-1ca90283dbe9"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"b6cb95cf-d003-4827-8237-7210fb688b4e"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Send Payment"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"returned"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"errorMessage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Transfer failed - Insufficient Funds"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-06-06T20:08:55.445Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div>
+<blockquote>
+<p>Example failure response (problem creating transfer):</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"packetId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"150d4148-f1ef-4db7-83ea-a6d018bc76b9"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"936f720b-c169-452b-b71c-30c9bcd9e6c5"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Send Payment"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"errorMessage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Transfer failed"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-06-06T20:46:20.587Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div>
+<blockquote>
+<p>Example “pending” status:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"packetId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2e73c586-1e43-4b9d-a635-34f7bf8bf16d"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9dddb85a-2677-4364-af5b-01b4de41d76d"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Send Payment"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"trackingNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9400100000000000000000"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-06-06T19:37:39.608Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h1 id='loan-payoff-request'>Loan Payoff Request</h1><h2 id='create-request'>Create Request</h2>
 <blockquote>
 <p>This route returns the following object:</p>
 </blockquote>
