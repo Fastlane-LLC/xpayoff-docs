@@ -1,6 +1,6 @@
 # Payments
 
-## Payment Types
+## Payment types
 
 - **Check** - We will print and mail the payment as a full sheet paper check to the lender specified in the request. The `vin` you provide will be written as the memo of the check. Optionally, you can provide `attn`, `titleTransfer` info, and/or a `message`, and it will be printed on the upper portion of sheet above the check.
 - **ACH** - Electronic payments using the routing and account number you provide in the request. The `vin` you provide will be sent as a memo with the ACH payment to the lender. Optionally, you can add a `message` to be appended with the VIN in the ACH memo. An example use case is to provide the contact info for title transfer in this message object.
@@ -89,6 +89,7 @@ achRoutingNumber | `string` : Routing Number for ACH Transfer           | Y     
 mailingAddress | `object` :  Mailing Address for Checks (see below)   | N            | Y
 message | `string` : limit of 57 characters. For ACH payments we will prepend the VIN to this message and that does not count against your character limit. | N | N      
 
+- The Title Transfer info that you provide will be sent to the lender. The purpose is to instruct the lender where to send the title to the lien has been paid off. We will attempt to send this info to the lender, and it may require you to contact the lender to ensure they can send you the title. Title transfer is only supported for payment type "Check".
 
 Title Transfer Object Key | Description                                                                                                                                                   | Required
 -------------- |---------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------
