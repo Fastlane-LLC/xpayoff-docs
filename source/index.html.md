@@ -19,6 +19,10 @@ Welcome to the LossExpress xPayoff API! You can utilize this API to get pertinen
 
 # Updates
 
+**2023-07-13**
+
+- New `discrepancies` array added to [Webhook Body](#webhook-body). Added if any discrepancies are found between the vin, customer name, or account number.
+
 **2023-06-16**
 
 - New [Payments](#payments) feature. This includes a new order type added that gives ability to Send Payment via ACH or Check. To access this, your company must have permissions enabled and completed the required setup on the developer portal.
@@ -277,6 +281,7 @@ The body of the request sent to the webhook will be a JSON object with the follo
 | paymentMailingAddress          | An object consisting of `streetAddress`, `city`, `state`, `zipCode` for a Payment Status request                                                                    |
 | documentUrl                    | The URL that can be used as a `GET` request to retrieve your requested digital document                                                                             | `"https://{YOUR_BASE_URL}/documents/f02e4050-6596-46ed-bf1e-0456403964a"`
 | maxAttempts                    | A boolean set to `true` if no more attempts are available on the order to be fulfilled                                                                              |`true`
+| discrepancies                  | A array of strings that can contain `"account number"`, `"vin"`, or `"customer name"` if any differences are found from the submitted data.                         |`["account number", "customer name"]`
 
 
 <aside class="notice">
