@@ -398,6 +398,12 @@
         <h1 id='introduction'>Introduction</h1>
 <p>Welcome to the LossExpress xPayoff API! You can utilize this API to get pertinent information regarding a consumer&#39;s vehicle loan.</p>
 <h1 id='updates'>Updates</h1>
+<p><strong>2023-07-13</strong></p>
+
+<ul>
+<li>New <code>discrepancies</code> array added to <a href="#webhook-body">Webhook Body</a>. Added if any discrepancies are found between the vin, customer name, or account number.</li>
+</ul>
+
 <p><strong>2023-06-16</strong></p>
 
 <ul>
@@ -885,6 +891,11 @@ See <a href="#loan-payoff-request">Loan Payoff Request</a>, <a href="#create-ord
 <td>maxAttempts</td>
 <td>A boolean set to <code>true</code> if no more attempts are available on the order to be fulfilled</td>
 <td><code>true</code></td>
+</tr>
+<tr>
+<td>discrepancies</td>
+<td>A array of strings that can contain <code>&quot;account number&quot;</code>, <code>&quot;vin&quot;</code>, or <code>&quot;customer name&quot;</code> if any differences are found from the submitted data.</td>
+<td><code>[&quot;account number&quot;, &quot;customer name&quot;]</code></td>
 </tr>
 </tbody></table>
 
