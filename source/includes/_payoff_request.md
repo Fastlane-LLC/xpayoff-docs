@@ -1,4 +1,4 @@
-# Loan Payoff Request
+# Loan Payoff Quote
 
 ## Create Request
 
@@ -13,7 +13,7 @@
 
 > Note the `payoffId` returned, as it is a completely unique identifier for the request that will help you reconcile returns sent via the webhook.
 
-You can use this route to make a loan payoff request. Please note that although not every field is required, our query success rate increases with the more data provided to us.
+You can use this route to make a loan payoff quote. Please note that although not every field is required, our query success rate increases with the more data provided to us.
 
 Please note that if you are subscribed to our Fulfillment Center, high success rates require as much information as possible.
 

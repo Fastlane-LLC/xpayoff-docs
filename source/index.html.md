@@ -55,12 +55,12 @@ Welcome to the LossExpress xPayoff API! You can utilize this API to get pertinen
 
 **2022-08-01**
 
-- New [Test VIN](#testing) for example payoff request errors
+- New [Test VIN](#testing) for example payoff quote errors
 
 **2022-06-29**
 
 - Adds [orders](#orders) for xData clients
-- New [cancel routes](#cancel-order-request) for payoff requests and orders
+- New [cancel routes](#cancel-order-request) for payoff quotes and orders
 - New [Test VINs](#testing) for orders
 
 # Testing
@@ -71,18 +71,18 @@ Production URL | Development URL                   |
 ----------|---------------------------------|
 `https://xpayoff-api.lossexpress.com/` | `https://xpayoff-api-dev.lossexpress.com/` 
 
-The following Test VINs can be used on both instances when making either a payoff request, payment, or xData order. 
-See [Loan Payoff Request](#loan-payoff-request), [Create Order(s) Request](#create-order-s-request), [Payments](#payments), and [Webhook Body](#webhook-body) for more details.
+The following Test VINs can be used on both instances when making either a payoff quote, payment, or xData order. 
+See [Loan Payoff Quote](#loan-payoff-quote), [Create Order(s) Request](#create-order-s-request), [Payments](#payments), and [Webhook Body](#webhook-body) for more details.
 
 Test VIN | Order Type                                                                                                                      | Description | 
 ----------|---------------------------------------------------------------------------------------------------------------------------------|-------------|
-`1FTMF1CB6JKE12626` | Payoff Request                                                                                                                  | Successful Payoff Quote Webhook                                                                            
-`1N4AA5AP8EC474073` | Payoff Request                                                                                                                  | Successful Payoff Quote Webhook                                                                                                                                                                
-`5FNYF4H46CB077722` | Payoff Request                                                                                                                  | Successful Payoff Quote Webhook                                                                                                                                                                
-`3LNHL2JC5CR800827` | Payoff Request                                                                                                                  | Successful Payoff Quote Webhook                                                                                                                                                                
-`ZA9RU31B9XLA12448` | Payoff Request                                                                                                                  | Successful Payoff Quote Webhook                                                                                                                                                                
-`1N4AL3AP8JC231503` | Payoff Request                                                                                                                  | Successful Payoff Quote Webhook                                                                                                                                                                
-`DX4AH51N1K6437778` | Payoff Request                                                                                                                  | Error Payoff Quote Webhook                                                                                                                                                       
+`1FTMF1CB6JKE12626` | Payoff Quote                                                                                                                  | Successful Payoff Quote Webhook                                                                            
+`1N4AA5AP8EC474073` | Payoff Quote                                                                                                                  | Successful Payoff Quote Webhook                                                                                                                                                                
+`5FNYF4H46CB077722` | Payoff Quote                                                                                                                  | Successful Payoff Quote Webhook                                                                                                                                                                
+`3LNHL2JC5CR800827` | Payoff Quote                                                                                                                  | Successful Payoff Quote Webhook                                                                                                                                                                
+`ZA9RU31B9XLA12448` | Payoff Quote                                                                                                                  | Successful Payoff Quote Webhook                                                                                                                                                                
+`1N4AL3AP8JC231503` | Payoff Quote                                                                                                                  | Successful Payoff Quote Webhook                                                                                                                                                                
+`DX4AH51N1K6437778` | Payoff Quote                                                                                                                  | Error Payoff Quote Webhook                                                                                                                                                       
 `DX3AA08D68N901917` | Title Status                                                                                                                    | Successful 'Title Status' Webhook (xData only)                                                                                                                                                   
 `DXHDU4AD4AU955646` | Payment Status                                                                                                                  | Successful 'Payment Status' Webhook (xData only)                                                                                                                                                 
 `DXWRA69M74M033915` | Lien Release Letter, Finance/Lease Agreement, Title Image, Bill of Sale, Repo Affidavit, One and the Same Letter, Payment History | Successful Document Order Webhook (xData only) 
@@ -103,7 +103,7 @@ Our xPayoff API utilizes a simple API key-based authentication, where the key (g
 
 We send any payoff information we receive for any requests you make as a POST call to any HTTPS endpoint you specify within our system. This section details what you can expect with webhooks within LossExpress xPayoff API.
 
-Please note that you'll be able to manage your webhooks within the developer interface, and that you _must_ have a webhook enabled in order to make payoff requests.
+Please note that you'll be able to manage your webhooks within the developer interface, and that you _must_ have a webhook enabled in order to make payoff quotes.
 
 ## General Information
 
@@ -111,7 +111,7 @@ Whenever we receive payoff information (almost always within seconds of an initi
 
 Your URL must be publicly accessible (or at least accessible by our servers), and must accept the request, responding with a 200 HTTP status code.
 
-We will deactivate any webhooks (as well as corresponding payoff requests) for any account that sends non-200 HTTP status codes in response to our requests to the URL five times in a row, or ten times in a 15 minute period of time.
+We will deactivate any webhooks (as well as corresponding payoff quotes) for any account that sends non-200 HTTP status codes in response to our requests to the URL five times in a row, or ten times in a 15 minute period of time.
 
 ## Signed Request
 
@@ -123,14 +123,14 @@ Where STRINGIFIED_REQUEST is the JSON of the request body (with no padding/white
 
 ## Webhook Body
 
-> Example "Payoff Request" Webhook Body:
+> Example "Payoff Quote" Webhook Body:
 
 ```json
 {
   "packetId": "f94bbd89-e9e0-45ac-a02b-e4d4afad6a8f",
   "payoffId": "f94bbd89-e9e0-45ac-a02b-e4d4afad6a8f",
   "orderId": "61951010-d4a0-48b3-86b6-3908da2b0800",
-  "orderType": "Payoff Request",
+  "orderType": "Payoff Quote",
   "accountNumber": "12345678",
   "ownerName": "Jane Doe",
   "coOwnerName": "John Doe",
@@ -230,7 +230,7 @@ Where STRINGIFIED_REQUEST is the JSON of the request body (with no padding/white
 ```json
 {
   "packetId": "38d3fb91-302d-4fd8-89d4-a9a6c63b41f4",
-  "orderType": "Payoff Request",
+  "orderType": "Payoff Quote",
   "orderId": "ddc7b596-d6f7-4c82-9bd5-90e9aeefe72e",
   "attempt": true,
   "status": "pending",
@@ -246,10 +246,10 @@ The body of the request sent to the webhook will be a JSON object with the follo
 | packetId                       | The LossExpress UUID (A `packet` is a grouping of orders)                                                                                                           | `"f94bbd89-e9e0-45ac-a02b-e4d4afad6a8f"` |
 | payoffId                       | The LossExpress UUID (Same as above - will be deprecated in future)                                                                                                 | `"f94bbd89-e9e0-45ac-a02b-e4d4afad6a8f"` |
 | orderId                        | The LossExpress UUID for the specific order                                                                                                                         | `"61951010-d4a0-48b3-86b6-3908da2b0800"` |
-| orderType                      | The type of order that has been requested                                                                                                                           | `"Payoff Request"`                       |
-| ownerName                      | The vehicle owner's name                                                                                                                                            | `"Payoff Request"`                       |
-| coOwnerName                    | The vehicle co-owner's name                                                                                                                                         | `"Payoff Request"`                       |
-| titledState                    | The Titled State of the vehicle                                                                                                                                     | `"Payoff Request"`                       |
+| orderType                      | The type of order that has been requested                                                                                                                           | `"Payoff Quote"`                       |
+| ownerName                      | The vehicle owner's name                                                                                                                                            | `"Payoff Quote"`                       |
+| coOwnerName                    | The vehicle co-owner's name                                                                                                                                         | `"Payoff Quote"`                       |
+| titledState                    | The Titled State of the vehicle                                                                                                                                     | `"Payoff Quote"`                       |
 | payoffAmount                   | A number containing the amount remaining on the loan                                                                                                                | `10222.33`                             |
 | perDiem                        | The per diem for the particular loan                                                                                                                                | `2.33`                                 |
 | validThroughDate               | A JSON timestamp for the valid through date                                                                                                                         | `"2020-08-22T00:00:00.000Z"`             |
