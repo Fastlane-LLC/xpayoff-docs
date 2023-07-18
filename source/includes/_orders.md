@@ -18,7 +18,7 @@ This route returns an array of strings, which consists of the current types of o
 
 Order Type | Description                      | 
 ----------|------------------------|
-Payoff Request | Information regarding a consumer's vehicle loan
+Payoff Quote | Information regarding a consumer's vehicle loan
 Bill of Sale | Digital copy
 Finance/Lease Agreement | Digital copy
 Lien Release Letter | Digital copy
@@ -39,7 +39,7 @@ Title Status | Request lender to mail the title
   "packetId": "c30ae9da-9222-4de5-81fe-fe1ac590fa0f",
   "orders": [
     {
-      "type": "Payoff Request",
+      "type": "Payoff Quote",
       "orderId": "3e8c38f3-f4ef-4414-88da-1793d25ef6f0",
     }, 
     {
@@ -51,7 +51,7 @@ Title Status | Request lender to mail the title
 }
 ```
 
-You can use this route to make a loan payoff request as well as additional order types if subscribed to xData. Please note that although not every field is required, our query success rate increases with the more data provided to us.
+You can use this route to make a loan payoff quote as well as additional order types if subscribed to xData. Please note that although not every field is required, our query success rate increases with the more data provided to us.
 
 Please note that if you are subscribed to our Fulfillment Center, high success rates require as much information as possible.
 
@@ -123,7 +123,7 @@ orderId | The LossExpress UUID associated with the order to be cancelled
   "orders": [
     {
       "orderId": "d932d1f0-656b-45d6-ae27-1e0904523b3f",
-      "type": "Payoff Request",
+      "type": "Payoff Quote",
       "status": "cancelled"
     },
     {
@@ -157,7 +157,7 @@ packetId | The LossExpress UUID associated with the packet to be cancelled
   "packetId": "c30ae9da-9222-4de5-81fe-fe1ac590fa0f",
   "orders": [
     {
-      "type": "Payoff Request",
+      "type": "Payoff Quote",
       "orderId": "3e8c38f3-f4ef-4414-88da-1793d25ef6f0",
     },
     {
