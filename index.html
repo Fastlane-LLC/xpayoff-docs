@@ -380,7 +380,7 @@
               </ul>
           </li>
           <li>
-            <a href="#loan-payoff-request" class="toc-h1 toc-link" data-title="Loan Payoff Request">Loan Payoff Request</a>
+            <a href="#loan-payoff-quote" class="toc-h1 toc-link" data-title="Loan Payoff Quote">Loan Payoff Quote</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#create-request" class="toc-h2 toc-link" data-title="Create Request">Create Request</a>
@@ -450,14 +450,14 @@
 <p><strong>2022-08-01</strong></p>
 
 <ul>
-<li>New <a href="#testing">Test VIN</a> for example payoff request errors</li>
+<li>New <a href="#testing">Test VIN</a> for example payoff quote errors</li>
 </ul>
 
 <p><strong>2022-06-29</strong></p>
 
 <ul>
 <li>Adds <a href="#orders">orders</a> for xData clients</li>
-<li>New <a href="#cancel-order-request">cancel routes</a> for payoff requests and orders</li>
+<li>New <a href="#cancel-order-request">cancel routes</a> for payoff quotes and orders</li>
 <li>New <a href="#testing">Test VINs</a> for orders</li>
 </ul>
 <h1 id='testing'>Testing</h1>
@@ -475,8 +475,8 @@
 </tr>
 </tbody></table>
 
-<p>The following Test VINs can be used on both instances when making either a payoff request, payment, or xData order. 
-See <a href="#loan-payoff-request">Loan Payoff Request</a>, <a href="#create-order-s-request">Create Order(s) Request</a>, <a href="#payments">Payments</a>, and <a href="#webhook-body">Webhook Body</a> for more details.</p>
+<p>The following Test VINs can be used on both instances when making either a payoff quote, payment, or xData order. 
+See <a href="#loan-payoff-quote">Loan Payoff Quote</a>, <a href="#create-order-s-request">Create Order(s) Request</a>, <a href="#payments">Payments</a>, and <a href="#webhook-body">Webhook Body</a> for more details.</p>
 
 <table><thead>
 <tr>
@@ -487,37 +487,37 @@ See <a href="#loan-payoff-request">Loan Payoff Request</a>, <a href="#create-ord
 </thead><tbody>
 <tr>
 <td><code>1FTMF1CB6JKE12626</code></td>
-<td>Payoff Request</td>
+<td>Payoff Quote</td>
 <td>Successful Payoff Quote Webhook</td>
 </tr>
 <tr>
 <td><code>1N4AA5AP8EC474073</code></td>
-<td>Payoff Request</td>
+<td>Payoff Quote</td>
 <td>Successful Payoff Quote Webhook</td>
 </tr>
 <tr>
 <td><code>5FNYF4H46CB077722</code></td>
-<td>Payoff Request</td>
+<td>Payoff Quote</td>
 <td>Successful Payoff Quote Webhook</td>
 </tr>
 <tr>
 <td><code>3LNHL2JC5CR800827</code></td>
-<td>Payoff Request</td>
+<td>Payoff Quote</td>
 <td>Successful Payoff Quote Webhook</td>
 </tr>
 <tr>
 <td><code>ZA9RU31B9XLA12448</code></td>
-<td>Payoff Request</td>
+<td>Payoff Quote</td>
 <td>Successful Payoff Quote Webhook</td>
 </tr>
 <tr>
 <td><code>1N4AL3AP8JC231503</code></td>
-<td>Payoff Request</td>
+<td>Payoff Quote</td>
 <td>Successful Payoff Quote Webhook</td>
 </tr>
 <tr>
 <td><code>DX4AH51N1K6437778</code></td>
-<td>Payoff Request</td>
+<td>Payoff Quote</td>
 <td>Error Payoff Quote Webhook</td>
 </tr>
 <tr>
@@ -568,13 +568,13 @@ See <a href="#loan-payoff-request">Loan Payoff Request</a>, <a href="#create-ord
 <h1 id='receiving-information-webhooks'>Receiving Information (Webhooks)</h1>
 <p>We send any payoff information we receive for any requests you make as a POST call to any HTTPS endpoint you specify within our system. This section details what you can expect with webhooks within LossExpress xPayoff API.</p>
 
-<p>Please note that you&#39;ll be able to manage your webhooks within the developer interface, and that you <em>must</em> have a webhook enabled in order to make payoff requests.</p>
+<p>Please note that you&#39;ll be able to manage your webhooks within the developer interface, and that you <em>must</em> have a webhook enabled in order to make payoff quotes.</p>
 <h2 id='general-information'>General Information</h2>
 <p>Whenever we receive payoff information (almost always within seconds of an initial request), we send a POST request to a URL that has been designated by you within our system.</p>
 
 <p>Your URL must be publicly accessible (or at least accessible by our servers), and must accept the request, responding with a 200 HTTP status code.</p>
 
-<p>We will deactivate any webhooks (as well as corresponding payoff requests) for any account that sends non-200 HTTP status codes in response to our requests to the URL five times in a row, or ten times in a 15 minute period of time.</p>
+<p>We will deactivate any webhooks (as well as corresponding payoff quotes) for any account that sends non-200 HTTP status codes in response to our requests to the URL five times in a row, or ten times in a 15 minute period of time.</p>
 <h2 id='signed-request'>Signed Request</h2>
 <p>Every request to a webhook will be signed by LossExpress, with the request containing a <code>X-LossExpress-Signature</code> header that will contain an SHA256 HMAC that is generated using the following string:</p>
 
@@ -583,13 +583,13 @@ See <a href="#loan-payoff-request">Loan Payoff Request</a>, <a href="#create-ord
 <p>Where STRINGIFIED_REQUEST is the JSON of the request body (with no padding/whitespace) and PAYOFF_ID is the payoff ID for the particular request. This signature is signed with your API key and can be used to validate that the request came from LossExpress.</p>
 <h2 id='webhook-body'>Webhook Body</h2>
 <blockquote>
-<p>Example &quot;Payoff Request&quot; Webhook Body:</p>
+<p>Example &quot;Payoff Quote&quot; Webhook Body:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"packetId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f94bbd89-e9e0-45ac-a02b-e4d4afad6a8f"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"payoffId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f94bbd89-e9e0-45ac-a02b-e4d4afad6a8f"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"61951010-d4a0-48b3-86b6-3908da2b0800"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Payoff Request"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Payoff Quote"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"accountNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"ownerName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jane Doe"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"coOwnerName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Doe"</span><span class="p">,</span><span class="w">
@@ -685,7 +685,7 @@ See <a href="#loan-payoff-request">Loan Payoff Request</a>, <a href="#create-ord
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"packetId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"38d3fb91-302d-4fd8-89d4-a9a6c63b41f4"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Payoff Request"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Payoff Quote"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ddc7b596-d6f7-4c82-9bd5-90e9aeefe72e"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"attempt"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
   </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending"</span><span class="p">,</span><span class="w">
@@ -720,22 +720,22 @@ See <a href="#loan-payoff-request">Loan Payoff Request</a>, <a href="#create-ord
 <tr>
 <td>orderType</td>
 <td>The type of order that has been requested</td>
-<td><code>&quot;Payoff Request&quot;</code></td>
+<td><code>&quot;Payoff Quote&quot;</code></td>
 </tr>
 <tr>
 <td>ownerName</td>
 <td>The vehicle owner&#39;s name</td>
-<td><code>&quot;Payoff Request&quot;</code></td>
+<td><code>&quot;Payoff Quote&quot;</code></td>
 </tr>
 <tr>
 <td>coOwnerName</td>
 <td>The vehicle co-owner&#39;s name</td>
-<td><code>&quot;Payoff Request&quot;</code></td>
+<td><code>&quot;Payoff Quote&quot;</code></td>
 </tr>
 <tr>
 <td>titledState</td>
 <td>The Titled State of the vehicle</td>
-<td><code>&quot;Payoff Request&quot;</code></td>
+<td><code>&quot;Payoff Quote&quot;</code></td>
 </tr>
 <tr>
 <td>payoffAmount</td>
@@ -1018,7 +1018,7 @@ See <a href="#loan-payoff-request">Loan Payoff Request</a>, <a href="#create-ord
 </tr>
 </thead><tbody>
 <tr>
-<td>Payoff Request</td>
+<td>Payoff Quote</td>
 <td>Information regarding a consumer&#39;s vehicle loan</td>
 </tr>
 <tr>
@@ -1066,7 +1066,7 @@ See <a href="#loan-payoff-request">Loan Payoff Request</a>, <a href="#create-ord
   </span><span class="nl">"packetId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c30ae9da-9222-4de5-81fe-fe1ac590fa0f"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"orders"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Payoff Request"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Payoff Quote"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3e8c38f3-f4ef-4414-88da-1793d25ef6f0"</span><span class="p">,</span><span class="w">
     </span><span class="p">},</span><span class="w"> 
     </span><span class="p">{</span><span class="w">
@@ -1077,7 +1077,7 @@ See <a href="#loan-payoff-request">Loan Payoff Request</a>, <a href="#create-ord
   </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p>You can use this route to make a loan payoff request as well as additional order types if subscribed to xData. Please note that although not every field is required, our query success rate increases with the more data provided to us.</p>
+<p>You can use this route to make a loan payoff quote as well as additional order types if subscribed to xData. Please note that although not every field is required, our query success rate increases with the more data provided to us.</p>
 
 <p>Please note that if you are subscribed to our Fulfillment Center, high success rates require as much information as possible.</p>
 <h3 id='http-request-2'>HTTP Request</h3>
@@ -1231,7 +1231,7 @@ See <a href="#loan-payoff-request">Loan Payoff Request</a>, <a href="#create-ord
   </span><span class="nl">"orders"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"d932d1f0-656b-45d6-ae27-1e0904523b3f"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Payoff Request"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Payoff Quote"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cancelled"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -1265,7 +1265,7 @@ See <a href="#loan-payoff-request">Loan Payoff Request</a>, <a href="#create-ord
   </span><span class="nl">"packetId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c30ae9da-9222-4de5-81fe-fe1ac590fa0f"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"orders"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Payoff Request"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Payoff Quote"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3e8c38f3-f4ef-4414-88da-1793d25ef6f0"</span><span class="p">,</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -1631,7 +1631,7 @@ This will throw <code>success: false</code> if no orders are added due to the ab
   </span><span class="nl">"trackingNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9400100000000000000000"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-06-06T19:37:39.608Z"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h1 id='loan-payoff-request'>Loan Payoff Request</h1><h2 id='create-request'>Create Request</h2>
+</span></code></pre></div><h1 id='loan-payoff-quote'>Loan Payoff Quote</h1><h2 id='create-request'>Create Request</h2>
 <blockquote>
 <p>This route returns the following object:</p>
 </blockquote>
@@ -1644,7 +1644,7 @@ This will throw <code>success: false</code> if no orders are added due to the ab
 <p>Note the <code>payoffId</code> returned, as it is a completely unique identifier for the request that will help you reconcile returns sent via the webhook.</p>
 </blockquote>
 
-<p>You can use this route to make a loan payoff request. Please note that although not every field is required, our query success rate increases with the more data provided to us.</p>
+<p>You can use this route to make a loan payoff quote. Please note that although not every field is required, our query success rate increases with the more data provided to us.</p>
 
 <p>Please note that if you are subscribed to our Fulfillment Center, high success rates require as much information as possible.</p>
 <h3 id='http-request'>HTTP Request</h3>
