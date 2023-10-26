@@ -1,4 +1,4 @@
-# Loan Payoff Quote
+<!-- # Loan Payoff Quote
 
 ## Create Request
 
@@ -43,4 +43,4 @@ socialSecurityNumber | The customer's social security number, can be full or the
 vehicleMileage | The customer's mileage on the vehicle, must be a number value, ex: `25000`                                                                                                                   | N | N
 vin | Vehicle Identification Number                                                                                                                                                                
 
-**Note: Some lenders require Account Number and/or Social Security Number to successfully return the payoff.**
+**Note: Some lenders require Account Number and/or Social Security Number to successfully return the payoff.** -->

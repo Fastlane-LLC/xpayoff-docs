@@ -1,4 +1,4 @@
-# Orders
+<!-- # Orders
 
 ## Fetch Order Types
 
@@ -187,4 +187,4 @@ packetId | The LossExpress UUID associated with the packet
 Body Parameters | Description
 --------- | -----------
 vin | Vehicle Identification Number                                                                                                                                                               | Y | N
-types | An array of the types of orders for the request      
+types | An array of the types of orders for the request       -->

@@ -1,4 +1,4 @@
-# Payments
+<!-- # Payments
 
 ## Payment types
 
@@ -193,4 +193,4 @@ zipCode | `string`                                                         | Y
   "trackingNumber": "9400100000000000000000",
   "timestamp": "2023-06-06T19:37:39.608Z"
 }
-```
+``` -->
