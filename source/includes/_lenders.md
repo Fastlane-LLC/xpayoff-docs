@@ -1,4 +1,4 @@
-# Lenders
+<!-- # Lenders
 
 > Example Lender Object
 
@@ -53,4 +53,4 @@ Parameter | Description
 --------- | -----------
 name | Name being queried against in LossExpress. Must be at least 3 characters long, and must be properly encoded
 
-
+ -->

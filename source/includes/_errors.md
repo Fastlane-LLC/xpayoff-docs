@@ -1,4 +1,4 @@
-# Errors
+<!-- # Errors
 
 > 400 Bad Request Example Error Response:
 
@@ -43,4 +43,4 @@ Our API uses the following error codes:
 | 405        | Method Not Allowed -- You tried to access a route with an invalid method.                 |
 | 406        | Not Acceptable -- You requested a format that isn't json.                                 |
 | 500        | Internal Server Error -- We had a problem with our server. Try again later.               |
-| 503        | Service Unavailable -- We're temporarily offline for maintenance. Please try again later. |
+| 503        | Service Unavailable -- We're temporarily offline for maintenance. Please try again later. | -->

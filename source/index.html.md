@@ -13,7 +13,11 @@ search: true
 code_clipboard: true
 ---
 
-# Introduction
+# Temporarily Disabled
+
+uh oh, if you are looking for docs reach out to support@lossexpress.com
+
+<!-- # Introduction
 
 Welcome to the LossExpress xPayoff API! You can utilize this API to get pertinent information regarding a consumer's vehicle loan.
 
@@ -312,4 +316,4 @@ Below are the current list of messages that could be returned when we run into a
 - Wait time too long
 - Wrong email
 - Wrong fax
-- Wrong phone number
+- Wrong phone number -->
